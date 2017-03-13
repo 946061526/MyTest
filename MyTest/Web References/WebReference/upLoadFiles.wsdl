@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s1="http://tempuri.org/AbstractTypes" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="upLoadOneChunk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bytes" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="savepath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="upLoadOneChunkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="upLoadOneChunkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="upLoadFirstChunk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bytes" type="s:base64Binary" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="upLoadFirstChunkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="upLoadFirstChunkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="upLoadOtherChunk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="bytes" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="fileLen" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="upLoadOtherChunkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="upLoadOtherChunkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="upLoadLastChunk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="savepath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="upLoadLastChunkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="upLoadLastChunkResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="test">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="str_bytes" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="savepath" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="testResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="testResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+    <s:schema targetNamespace="http://tempuri.org/AbstractTypes">
+      <s:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <s:complexType name="StringArray">
+        <s:complexContent mixed="false">
+          <s:restriction base="soapenc:Array">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="unbounded" name="String" type="s:string" />
+            </s:sequence>
+          </s:restriction>
+        </s:complexContent>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="upLoadOneChunkSoapIn">
+    <wsdl:part name="parameters" element="tns:upLoadOneChunk" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOneChunkSoapOut">
+    <wsdl:part name="parameters" element="tns:upLoadOneChunkResponse" />
+  </wsdl:message>
+  <wsdl:message name="upLoadFirstChunkSoapIn">
+    <wsdl:part name="parameters" element="tns:upLoadFirstChunk" />
+  </wsdl:message>
+  <wsdl:message name="upLoadFirstChunkSoapOut">
+    <wsdl:part name="parameters" element="tns:upLoadFirstChunkResponse" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOtherChunkSoapIn">
+    <wsdl:part name="parameters" element="tns:upLoadOtherChunk" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOtherChunkSoapOut">
+    <wsdl:part name="parameters" element="tns:upLoadOtherChunkResponse" />
+  </wsdl:message>
+  <wsdl:message name="upLoadLastChunkSoapIn">
+    <wsdl:part name="parameters" element="tns:upLoadLastChunk" />
+  </wsdl:message>
+  <wsdl:message name="upLoadLastChunkSoapOut">
+    <wsdl:part name="parameters" element="tns:upLoadLastChunkResponse" />
+  </wsdl:message>
+  <wsdl:message name="testSoapIn">
+    <wsdl:part name="parameters" element="tns:test" />
+  </wsdl:message>
+  <wsdl:message name="testSoapOut">
+    <wsdl:part name="parameters" element="tns:testResponse" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOneChunkHttpGetIn">
+    <wsdl:part name="bytes" type="s1:StringArray" />
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="savepath" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOneChunkHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadFirstChunkHttpGetIn">
+    <wsdl:part name="bytes" type="s1:StringArray" />
+    <wsdl:part name="fileName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadFirstChunkHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOtherChunkHttpGetIn">
+    <wsdl:part name="bytes" type="s1:StringArray" />
+    <wsdl:part name="fileLen" type="s:string" />
+    <wsdl:part name="fileName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOtherChunkHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadLastChunkHttpGetIn">
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="savepath" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadLastChunkHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="testHttpGetIn">
+    <wsdl:part name="str_bytes" type="s:string" />
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="savepath" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="testHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOneChunkHttpPostIn">
+    <wsdl:part name="bytes" type="s1:StringArray" />
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="savepath" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOneChunkHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadFirstChunkHttpPostIn">
+    <wsdl:part name="bytes" type="s1:StringArray" />
+    <wsdl:part name="fileName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadFirstChunkHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOtherChunkHttpPostIn">
+    <wsdl:part name="bytes" type="s1:StringArray" />
+    <wsdl:part name="fileLen" type="s:string" />
+    <wsdl:part name="fileName" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadOtherChunkHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadLastChunkHttpPostIn">
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="savepath" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="upLoadLastChunkHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="testHttpPostIn">
+    <wsdl:part name="str_bytes" type="s:string" />
+    <wsdl:part name="fileName" type="s:string" />
+    <wsdl:part name="savepath" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="testHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="upLoadFilesSoap">
+    <wsdl:operation name="upLoadOneChunk">
+      <wsdl:input message="tns:upLoadOneChunkSoapIn" />
+      <wsdl:output message="tns:upLoadOneChunkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="upLoadFirstChunk">
+      <wsdl:input message="tns:upLoadFirstChunkSoapIn" />
+      <wsdl:output message="tns:upLoadFirstChunkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="upLoadOtherChunk">
+      <wsdl:input message="tns:upLoadOtherChunkSoapIn" />
+      <wsdl:output message="tns:upLoadOtherChunkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="upLoadLastChunk">
+      <wsdl:input message="tns:upLoadLastChunkSoapIn" />
+      <wsdl:output message="tns:upLoadLastChunkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testSoapIn" />
+      <wsdl:output message="tns:testSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="upLoadFilesHttpGet">
+    <wsdl:operation name="upLoadOneChunk">
+      <wsdl:input message="tns:upLoadOneChunkHttpGetIn" />
+      <wsdl:output message="tns:upLoadOneChunkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="upLoadFirstChunk">
+      <wsdl:input message="tns:upLoadFirstChunkHttpGetIn" />
+      <wsdl:output message="tns:upLoadFirstChunkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="upLoadOtherChunk">
+      <wsdl:input message="tns:upLoadOtherChunkHttpGetIn" />
+      <wsdl:output message="tns:upLoadOtherChunkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="upLoadLastChunk">
+      <wsdl:input message="tns:upLoadLastChunkHttpGetIn" />
+      <wsdl:output message="tns:upLoadLastChunkHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testHttpGetIn" />
+      <wsdl:output message="tns:testHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="upLoadFilesHttpPost">
+    <wsdl:operation name="upLoadOneChunk">
+      <wsdl:input message="tns:upLoadOneChunkHttpPostIn" />
+      <wsdl:output message="tns:upLoadOneChunkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="upLoadFirstChunk">
+      <wsdl:input message="tns:upLoadFirstChunkHttpPostIn" />
+      <wsdl:output message="tns:upLoadFirstChunkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="upLoadOtherChunk">
+      <wsdl:input message="tns:upLoadOtherChunkHttpPostIn" />
+      <wsdl:output message="tns:upLoadOtherChunkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="upLoadLastChunk">
+      <wsdl:input message="tns:upLoadLastChunkHttpPostIn" />
+      <wsdl:output message="tns:upLoadLastChunkHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <wsdl:input message="tns:testHttpPostIn" />
+      <wsdl:output message="tns:testHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="upLoadFilesSoap" type="tns:upLoadFilesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="upLoadOneChunk">
+      <soap:operation soapAction="http://tempuri.org/upLoadOneChunk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadFirstChunk">
+      <soap:operation soapAction="http://tempuri.org/upLoadFirstChunk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadOtherChunk">
+      <soap:operation soapAction="http://tempuri.org/upLoadOtherChunk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadLastChunk">
+      <soap:operation soapAction="http://tempuri.org/upLoadLastChunk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap:operation soapAction="http://tempuri.org/test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="upLoadFilesSoap12" type="tns:upLoadFilesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="upLoadOneChunk">
+      <soap12:operation soapAction="http://tempuri.org/upLoadOneChunk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadFirstChunk">
+      <soap12:operation soapAction="http://tempuri.org/upLoadFirstChunk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadOtherChunk">
+      <soap12:operation soapAction="http://tempuri.org/upLoadOtherChunk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadLastChunk">
+      <soap12:operation soapAction="http://tempuri.org/upLoadLastChunk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <soap12:operation soapAction="http://tempuri.org/test" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="upLoadFilesHttpGet" type="tns:upLoadFilesHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="upLoadOneChunk">
+      <http:operation location="/upLoadOneChunk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadFirstChunk">
+      <http:operation location="/upLoadFirstChunk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadOtherChunk">
+      <http:operation location="/upLoadOtherChunk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadLastChunk">
+      <http:operation location="/upLoadLastChunk" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <http:operation location="/test" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="upLoadFilesHttpPost" type="tns:upLoadFilesHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="upLoadOneChunk">
+      <http:operation location="/upLoadOneChunk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadFirstChunk">
+      <http:operation location="/upLoadFirstChunk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadOtherChunk">
+      <http:operation location="/upLoadOtherChunk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="upLoadLastChunk">
+      <http:operation location="/upLoadLastChunk" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="test">
+      <http:operation location="/test" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="upLoadFiles">
+    <wsdl:port name="upLoadFilesSoap" binding="tns:upLoadFilesSoap">
+      <soap:address location="http://192.168.1.130:9997/upLoadFiles.asmx" />
+    </wsdl:port>
+    <wsdl:port name="upLoadFilesSoap12" binding="tns:upLoadFilesSoap12">
+      <soap12:address location="http://192.168.1.130:9997/upLoadFiles.asmx" />
+    </wsdl:port>
+    <wsdl:port name="upLoadFilesHttpGet" binding="tns:upLoadFilesHttpGet">
+      <http:address location="http://192.168.1.130:9997/upLoadFiles.asmx" />
+    </wsdl:port>
+    <wsdl:port name="upLoadFilesHttpPost" binding="tns:upLoadFilesHttpPost">
+      <http:address location="http://192.168.1.130:9997/upLoadFiles.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

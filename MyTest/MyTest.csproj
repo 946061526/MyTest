@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BC5DFA10-62A7-4FAD-8953-802166259DA3}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyTest</RootNamespace>
+    <AssemblyName>MyTest</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Lucene.China">
+      <HintPath>lib\Lucene.China.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=2.9.2.2, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Lucene.Net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>E:\Code\xuef\xuef\bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="YGWebUtility">
+      <HintPath>..\..\Code\refDll\YGWebUtility.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\dt\style.css" />
+    <Content Include="css\dt\ui-dialog.css" />
+    <Content Include="css\jquery.multiselect.css" />
+    <Content Include="css\selector.css" />
+    <Content Include="css\stylesheets\print.css" />
+    <Content Include="css\stylesheets\pygment_trac.css" />
+    <Content Include="css\stylesheets\stylesheet.css" />
+    <Content Include="css\zyUpload.css" />
+    <Content Include="data\sDict.txt" />
+    <Content Include="data\sNoise.txt" />
+    <Content Include="FileStreamTest.aspx" />
+    <Content Include="H5_Storage.html" />
+    <Content Include="HtmlPage1.html" />
+    <Content Include="HtmlPage2.html" />
+    <Content Include="HtmlPage3.html" />
+    <Content Include="js\address.js" />
+    <Content Include="js\BottomFun.js" />
+    <Content Include="js\dt\common.js" />
+    <Content Include="js\dt\dialog-plus-min.js" />
+    <Content Include="js\dt\laymain.js" />
+    <Content Include="js\dt\jquery-1.11.2.min.js" />
+    <Content Include="js\dt\uploader.js" />
+    <Content Include="js\exif.js" />
+    <Content Include="js\H5_Storage.js" />
+    <Content Include="js\html5\anticheat.js" />
+    <Content Include="js\html5\c.js" />
+    <Content Include="js\html5\cpro.js" />
+    <Content Include="js\html5\demo.js" />
+    <Content Include="js\html5\f.js" />
+    <Content Include="js\html5\h.js" />
+    <Content Include="js\html5\jquery-1.4.2.min.js" />
+    <Content Include="js\html5\jquery-1.7.2.js" />
+    <Content Include="js\html5\oojs.js" />
+    <Content Include="js\html5\zyFile.js" />
+    <Content Include="js\html5\zyUpload.js" />
+    <Content Include="js\jquery-1.11.3.min.js" />
+    <Content Include="js\jquery-1.8.3.js" />
+    <Content Include="js\jquery-2.0.3.min.js" />
+    <Content Include="js\jquery-ui.source.js" />
+    <Content Include="js\jquery.ui.touch-punch.source.js" />
+    <Content Include="js\jquery190.js" />
+    <Content Include="js\LocalResizeIMG.js" />
+    <Content Include="js\lrz.js" />
+    <Content Include="js\mobileBUGFix.mini.js" />
+    <Content Include="js\multiSelect\jquery.multiselect.min.js" />
+    <Content Include="js\pageDialog.js" />
+    <Content Include="js\Selector.js" />
+    <Content Include="js\uploadImg1.js" />
+    <Content Include="lib\Lucene.Net.dll" />
+    <Content Include="lib\PanGu.dll" />
+    <Content Include="lib\PanGu.HighLight.dll" />
+    <Content Include="lib\PanGu.Lucene.Analyzer.dll" />
+    <Content Include="lib\PosDisplayCtrl.dll" />
+    <Content Include="multiselect.html" />
+    <Content Include="scanPage.html" />
+    <Content Include="test1.html" />
+    <Content Include="Test1.aspx" />
+    <Content Include="testXuehua.html" />
+    <Content Include="UploadHtml5.html" />
+    <Content Include="uploadImg1.html" />
+    <Content Include="uploadImg2.html" />
+    <Content Include="UploadSvc.ashx" />
+    <Content Include="Excute\uploadFiles.ashx" />
+    <Content Include="Excute\uploadFilesToServer.ashx" />
+    <Content Include="V6.aspx" />
+    <Content Include="ValidCode.aspx" />
+    <Content Include="VcCode\GetVcImg.aspx" />
+    <Content Include="VcCode\resource\text.txt" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\1.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\10.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\2.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\3.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\4.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\5.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\6.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\7.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\8.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\advanced\9.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\1.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\10.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\11.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\12.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\13.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\14.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\15.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\16.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\17.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\18.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\19.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\2.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\20.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\3.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\4.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\5.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\6.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\7.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\8.jpg" />
+    <Content Include="VcCode\resource\VcBackgroundImg\normal\9.jpg" />
+    <Content Include="VcCode\test.aspx" />
+    <Content Include="VcCode\VcCode.css" />
+    <Content Include="VcCode\VcCodeHtml.ascx" />
+    <Content Include="VcCode\vcCodeUtil.js" />
+    <Content Include="WordSplit_Lucene.aspx" />
+    <Content Include="WXPay\notify_url.aspx" />
+    <Content Include="WXPay\WXPay.aspx" />
+    <Content Include="联动下拉.html" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Web References\WebReference\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </Content>
+    <Content Include="VcCode\BLL\API.ashx" />
+    <None Include="Web References\WebReference\upLoadFiles.wsdl" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\diyUpload.css" />
+    <Content Include="css\webuploader.css" />
+    <Content Include="images\bgblack.png" />
+    <Content Include="images\check_alt.png" />
+    <Content Include="images\filebg\avi.png" />
+    <Content Include="images\filebg\cdr.png" />
+    <Content Include="images\filebg\csv.png" />
+    <Content Include="images\filebg\doc.png" />
+    <Content Include="images\filebg\jpg.png" />
+    <Content Include="images\filebg\mp3.png" />
+    <Content Include="images\filebg\pdf.png" />
+    <Content Include="images\filebg\png.png" />
+    <Content Include="images\filebg\ppt.png" />
+    <Content Include="images\filebg\rar.png" />
+    <Content Include="images\filebg\txt.png" />
+    <Content Include="images\filebg\xls.png" />
+    <Content Include="images\filebg\zip.png" />
+    <Content Include="images\filebg\复件 txt.png" />
+    <Content Include="images\x_alt.png" />
+    <Content Include="js\diyUpload.js" />
+    <Content Include="js\jquery.js" />
+    <Content Include="js\plupload.dev.js" />
+    <Content Include="js\webuploader.html5only.min.js" />
+    <Content Include="UploadFiles.html" />
+    <None Include="Web References\WebReference\upLoadFiles.disco" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Excute\ConvertPDF2Image.cs" />
+    <Compile Include="Excute\FileHelper.cs" />
+    <Compile Include="Excute\uploadFiles.ashx.cs">
+      <DependentUpon>uploadFiles.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Excute\uploadFilesToServer.ashx.cs">
+      <DependentUpon>uploadFilesToServer.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="FileStreamTest.aspx.cs">
+      <DependentUpon>FileStreamTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FileStreamTest.aspx.designer.cs">
+      <DependentUpon>FileStreamTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="StaticTest.cs" />
+    <Compile Include="Test1.aspx.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Test1.aspx.designer.cs">
+      <DependentUpon>Test1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UploadSvc.ashx.cs">
+      <DependentUpon>UploadSvc.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="V6.aspx.cs">
+      <DependentUpon>V6.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="V6.aspx.designer.cs">
+      <DependentUpon>V6.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ValidCode.aspx.cs">
+      <DependentUpon>ValidCode.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ValidCode.aspx.designer.cs">
+      <DependentUpon>ValidCode.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VcCode\BLL\API.ashx.cs">
+      <DependentUpon>API.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="VcCode\BLL\VcBLL.cs" />
+    <Compile Include="VcCode\GetVcImg.aspx.cs">
+      <DependentUpon>GetVcImg.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VcCode\GetVcImg.aspx.designer.cs">
+      <DependentUpon>GetVcImg.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VcCode\test.aspx.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VcCode\test.aspx.designer.cs">
+      <DependentUpon>test.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="VcCode\util\Draw.cs" />
+    <Compile Include="VcCode\util\Position.cs" />
+    <Compile Include="VcCode\util\Text.cs" />
+    <Compile Include="VcCode\util\VcColor.cs" />
+    <Compile Include="VcCode\util\VcRandom.cs" />
+    <Compile Include="VcCode\VcCodeHtml.ascx.cs">
+      <DependentUpon>VcCodeHtml.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="VcCode\VcCodeHtml.ascx.designer.cs">
+      <DependentUpon>VcCodeHtml.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\WebReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="WordSplit_Lucene.aspx.cs">
+      <DependentUpon>WordSplit_Lucene.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WordSplit_Lucene.aspx.designer.cs">
+      <DependentUpon>WordSplit_Lucene.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WXPay\HttpUtil.cs" />
+    <Compile Include="WXPay\MD5Util.cs" />
+    <Compile Include="WXPay\notify_url.aspx.cs">
+      <DependentUpon>notify_url.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WXPay\notify_url.aspx.designer.cs">
+      <DependentUpon>notify_url.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WXPay\RequestHandler.cs" />
+    <Compile Include="WXPay\ResponseHandler.cs" />
+    <Compile Include="WXPay\TenpayUtil.cs" />
+    <Compile Include="WXPay\WXPay.aspx.cs">
+      <DependentUpon>WXPay.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="WXPay\WXPay.aspx.designer.cs">
+      <DependentUpon>WXPay.aspx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="tmp\" />
+    <Folder Include="upload\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://192.168.1.130:9997/upLoadFiles.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\WebReference\</RelPath>
+      <UpdateFromURL>http://192.168.1.130:9997/upLoadFiles.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>MyTest_WebReference_upLoadFiles</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>9938</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:9938/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

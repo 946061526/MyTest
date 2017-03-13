@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>移动端图片上传解决方案localResizeIMG先压缩后ajax无刷新上传</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width , initial-scale=1.0 , user-scalable=0 , minimum-scale=1.0 , maximum-scale=1.0" />
+    <!--<script type='text/javascript' src='js/jquery-2.0.3.min.js'></script>-->
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script type='text/javascript' src='js/LocalResizeIMG.js'></script>
+    <script type='text/javascript' src='js/patch/mobileBUGFix.mini.js'></script>
+    <style type="text/css">
+        body {
+            font-family: "微软雅黑";
+        }
+
+        .uploadbtn {
+            display: block;
+            height: 40px;
+            line-height: 40px;
+            color: #333;
+            text-align: center;
+            width: 100%;
+            background: #f2f2f2;
+            text-decoration: none;
+        }
+
+        .imglist {
+            min-height: 200px;
+            margin: 10px;
+        }
+
+            .imglist img {
+                width: 100%;
+            }
+    </style>
+</head>
+<body>
+    <div style="width:500px;margin:10px auto; border:solid 1px #ddd; overflow:hidden; ">
+        <input type="file" id="uploadphoto" name="uploadfile" value="请点击上传图片"  />
+        <div class="imglist"></div>
+        <!--<a href="javascript:void(0);" onclick="uploadphoto.click()" class="uploadbtn">点击上传文件</a>-->
+
+
+
+        <!--<input type='text' name='textfield' id='textfield' class='textfield' />
+        <input type='button' id="btnBroswer" class='am-btn pink_red_bt am-radius' value='浏览...' />
+        <input type="file" name="file" class="file" id="fileField" accept="image/*" onchange="fileChange(1);" style="display:none;" />-->
+        <!--<input type="submit" id="Submit1" name="submit" class="am-btn pink_red_bt am-radius" value="上传" />-->
+    </div>
+    <div style="width:170px; float:left; margin-top:0px">
+        <input type="hidden" id="hdPageImage" value="/images/Other/Default_Picture.png" />
+        <img id="imgDefault" style="display:block; width:100%;height:130px;" src="/images/Other/Default_Picture.png" />
+    </div>
+    <script type="text/javascript">
+        //浏览图片
+        $("#btnBroswer").click(function () {
+            return $("#fileField").click();
+        });
+
+        $("#Submit1").hide();
+
+        //上传至服务器后回调地址
+        function CallBack(val) {
+            if (val != 'error') {
+                $("#hdPageImage").val(val);
+                $("#imgDefault").attr("src", val);
+                onLoading(0);
+            }
+            else {
+                onLoading(-1);
+            }
+        }
+        //上传状态
+        function onLoading(p) {
+            if (p == 1) {
+                //$.jBox.tip("正在上传...", 'loading');
+            }
+            else if (p == 0) {
+                //setTimeout(function () { $.jBox.closeTip(); }, 2000);
+                //$.jBox.tip("上传完成", 'success');
+                fileChange(0);
+            }
+            else {
+                //setTimeout(function () { $.jBox.closeTip(); }, 2000);
+                //$.jBox.tip("上传失败,请重新上传", 'error');
+                $("#Submit1").hide();
+            }
+        }
+        //选择图片改变事件
+        function fileChange(p) {
+            if (p == 1) {
+                document.getElementById('textfield').value = document.getElementById('fileField').value;
+                $("#Submit1").show();
+            }
+            else
+                $("#Submit1").hide();
+        }
+
+        $(document).ready(function (e) {
+
+            $("#Submit1").click(function () {
+                onLoading(1)
+                uploadphoto.click()
+            })
+
+            $('#uploadphoto').localResizeIMG({
+                width: 650,
+                quality: 0.8,
+                success: function (result) {
+                    var submitData = {
+                        base64_string: result.clearBase64,
+                    };
+                    $.ajax({
+                        type: "POST",
+                        url: "UploadSvc.ashx",
+                        data: submitData,
+                        //dataType: "json",
+                        success: function (data) {
+                            alert(data);
+                            //var attstr = '<img src="' + data + '">';
+                            //$(".imglist").append(attstr);
+                            CallBack(data)
+                            return false;
+
+                            //if (0 == data.status) {
+                            //    alert(data.content);
+                            //    return false;
+                            //} else {
+                            //    //alert(data.content);
+                            //    var attstr = '<img src="' + data.url + '">';
+                            //    $(".imglist").append(attstr);
+                            //    return false;
+                            //}
+                        },
+                        complete: function (XMLHttpRequest, textStatus) {
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) { //上传失败
+                            //alert(XMLHttpRequest.status);
+                            //alert(XMLHttpRequest.readyState);
+                            //alert(textStatus);
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>

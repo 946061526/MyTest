@@ -1,0 +1,147 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <title>三级联动多选下拉框</title>
+    <!--<script src="<?php echo base_url() ?>js/jquery-1.7.2.min.js"></script>
+    <link href="<?php echo base_url(); ?>css/buildfair/jquery-ui.css" rel="stylesheet" />
+    <script src="<?php echo base_url() ?>js/jquery-ui.min.js"></script>
+    <script src="<?php echo base_url() ?>js/jquery.multiselect.min.js"></script>
+    <script src="<?php echo base_url() ?>js/jquery.multiselect.zh-cn.js"></script>
+    <link href="<?php echo base_url(); ?>css/buildfair/jquery.multiselect.css" rel="stylesheet" />
+
+    <script src="<?php echo base_url() ?>js/jquery.multiselect.filter.js"></script>
+    <link href="<?php echo base_url(); ?>css/buildfair/jquery.multiselect.filter.css" rel="stylesheet" />-->
+
+    <link href="css/jquery.multiselect.css" rel="stylesheet" />
+    <script src="js/jquery-1.8.3.js"></script>
+    <script src="js/multiSelect/jquery.multiselect.min.js"></script>
+
+    <script>
+        (function () {
+            // 默认只显示选择了的3个
+            var DEF_SHOW_SELELCTED_NUMBER = 3;
+
+            $("#first_dist_single").multiselect({
+                multiple: false,
+                header: "选择一项",
+                selectedList: 1
+            });
+
+            $("#first_dist_single_filter").multiselect({
+                multiple: false,
+                noneSelectedText: "请选择",
+                selectedList: 1
+            }).multiselectfilter();
+
+            $("#first_dist").multiselect({
+                selectedList: DEF_SHOW_SELELCTED_NUMBER,
+                noneSelectedText: '请选择省市',
+                close: function (event, ui) {
+                    showNextDist($(this));
+                }
+            }
+            );
+            var showNextDist = function (obj) {
+                var level = obj.data('level'),
+                        nextLevel = parseInt(level) + 1,
+                        nextDistNode = null, defaultText = '';
+                if (parseInt(nextLevel) === 2) {
+                    nextDistNode = $('#second_dist');
+                    defaultText = '请选择市县';
+                } else if (parseInt(nextLevel) === 3) {
+                    nextDistNode = $('#third_dist');
+                    defaultText = '请选择地级市';
+                } else if (parseInt(nextLevel) === 4) {
+                    nextDistNode = $('#fourth_dist');
+                    defaultText = '请选择区镇';
+                }
+                var selectedArr = obj.multiselect("getChecked").map(function () {
+                    return this.value;
+                }).get();
+                var selectedVal = selectedArr.join(',');
+                if (selectedVal !== '') {
+                    //var url = '<?php echo site_url(); ?>/m/buildfair/get_district';
+                    //$.post(url, { upid: selectedVal, level: nextLevel }, function (data) {
+                    //    if (data.success) {
+                    //        var srcData = data.data;
+                    //        if (nextDistNode !== null && srcData.length > 0) {
+                    //            nextDistNode.html('');
+                    //            for (index in srcData) {
+                    //                var opt = srcData[index]
+                    //                nextDistNode.append('<option value="' + opt.id + '">' + opt.name + '</option>');
+                    //            }
+                    //            nextDistNode.multiselect({
+                    //                selectedList: DEF_SHOW_SELELCTED_NUMBER,
+                    //                noneSelectedText: defaultText,
+                    //                close: function (event, ui) {
+                    //                    showNextDist(nextDistNode);
+                    //                }
+                    //            }).multiselect('refresh');
+                    //        }
+                    //    }
+                    //}, 'json');
+                    nextDistNode.append('<option value="-1">我的学生</option>');
+                    nextDistNode.append('<option value="0">现在的学生</option>');
+                    nextDistNode.append('<option value="1">以往的学生</option>');
+                    nextDistNode.multiselect({
+                        selectedList: DEF_SHOW_SELELCTED_NUMBER,
+                        noneSelectedText: defaultText,
+                        close: function (event, ui) {
+                            showNextDist(nextDistNode);
+                        }
+                    }).multiselect('refresh');
+                } else {
+                    if (nextDistNode !== null) {
+                        nextDistNode.multiselect().multiselect("destroy").hide();
+                        var nextDistLevel = nextDistNode.data('level');
+                        if (parseInt(nextDistLevel) === 2) {
+                            $('#third_dist').multiselect().multiselect("destroy").hide();
+                            $('#fourth_dist').multiselect().multiselect("destroy").hide();
+                        } else if (parseInt(nextDistLevel) === 3) {
+                            $('#fourth_dist').multiselect().multiselect("destroy").hide();
+                        }
+                    }
+                }
+            }
+
+        })();
+    </script>  
+
+</head>
+<body>
+    <div>
+        <p>多选下拉框：</p>
+        <select id="first_dist" multiple="multiple" data-level="1" style="display: block;">
+            <option value="-1">我的学生1</option>
+            <option value="0">现在的学生1</option>
+            <option value="1">以往的学生1</option>
+        </select>
+        <select id="second_dist" multiple="multiple" data-level="2" style="display: block;"></select>
+        <select id="third_dist" multiple="multiple" data-level="3" style="display: block;"></select>
+        <select id="fourth_dist" multiple="multiple" data-level="4" style="display: block;"></select>
+        <br />
+    </div>
+    <div>
+        <p>单选下拉框：</p>
+        <select id="first_dist_single" style="display: block;">
+            <option value="-1">我的学生2</option>
+            <option value="0">现在的学生2</option>
+            <option value="1">以往的学生2</option>
+        </select>
+    </div>
+
+    <div>
+        <p>单选下拉框（带搜索功能）：</p>
+        <select id="first_dist_single_filter" style="display: none;">
+            <option value="-1">我的学生3</option>
+            <option value="0">现在的学生3</option>
+            <option value="1">以往的学生3</option>
+        </select>
+    </div>
+</body>
+</html> 

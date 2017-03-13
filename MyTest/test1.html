@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>测试测试from Branch</title>
+    <script>
+        var GetNormalStr = function (s) {
+            var pattern = new RegExp("[`~@#$^&\*=|{}\\[\\]<>/\￥'【】]");//"[`~@#$^&*=|{}'\\[\\].+￥%<>/~！#￥…（）—|{}【】》‘：']"
+            var rs = "";
+            for (var i = 0; i < s.length; i++) {
+                rs += s.substr(i, 1).replace(pattern, '');
+            }
+            return rs;
+        }
+
+        var ss = "adf[`~@#$^&*=|{}'\asdfa-sfd\[\asdf\]<>/！￥阿法\\||守法【】‘：”阿萨德|发送“']";
+        console.log(GetNormalStr(ss));
+
+        //var s = 'afsd||啊放假哈||1234&*(&**^||asdfad';
+        //s = s.replace(/\||/g, "");
+        //document.write(s);
+
+        //document.write('<br/><br/>');
+
+        //var f = 100.1;
+        //f = Math.round(f * 1000) / 1000;
+        //f = Math.round(f * 100) / 100;
+        //if (/^\d+$/.test(f))
+        //    document.write(f + '.00');
+        //if (/^\d+\.\d$/.test(f))
+        //    document.write(f + '0');
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>

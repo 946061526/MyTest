@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <h3>LocalStorage</h3>
+    <input type="text" id="txtInput" /><input type="button" value="加入缓存" id="btnadd" />&nbsp;&nbsp;
+    <input type="button" value="删除" id="btndel" />&nbsp;&nbsp;
+    <input type="button" value="查询" id="btnsel" />&nbsp;&nbsp;
+    <input type="button" value="清空" id="btnclear" />
+    <script type="text/javascript">
+        //var nums = [];
+        //var names = ['Jane', 'Sam', 'Mike', 'Bob'];
+
+        //Array.prototype.indexOf = function (val) {
+        //    for (var i = 0; i < this.length; i++) {
+        //        if (val == this[i]) return i;
+        //    }
+        //    return -1;
+        //}
+        //Array.prototype.toStr = function () {
+        //    var _str = '';
+        //    console.log(this)
+        //    for (var i in this) {
+        //        _str = _str + this[i] + ',';//下标
+        //    }
+        //    return _str.substring(_str.length - 1, _str.length);
+        //}
+        Array.prototype.remove = function (val) {
+            var index = this.indexOf(val);
+            if (index > -1)
+                this.splice(index, 1);
+        }
+
+        var searchData = [];
+
+        var addStorage = function (msg) {
+
+            //nums.push(msg);
+            //console.log(nums)
+            //window.localStorage.setItem('data', nums);
+            //nums = window.localStorage.data.split(',');
+            //console.log(nums)
+            //return;
+            var _str = '';
+            searchData = window.localStorage.data;
+            if (searchData != undefined && searchData.length > 0) {
+                searchData = searchData.split(',');
+                if (searchData.indexOf(msg) > -1) {
+                    searchData.remove(msg);
+                    console.log(searchData);
+                }
+                _str = msg + ',' + searchData.toString();
+                searchData = _str.split(',');
+                if (searchData.length > 6) {
+                    searchData.splice(6, 1);
+                }
+                _str = searchData.toString();
+            } else {
+                _str = msg;
+            }
+            window.localStorage.setItem('data', _str);
+        }
+        var delStorage = function (msg) {
+
+            searchData = window.localStorage.data.split(',');
+            searchData.remove(msg);
+            window.localStorage.setItem('data', searchData.toString());
+        }
+        var clearStorage = function () {
+            delete localStorage.data;
+        }
+        var selectStoraate = function () {
+            searchData = window.localStorage.data;
+            console.log(searchData);
+        }
+        //新增
+        var btnadd = document.getElementById('btnadd');
+        btnadd.addEventListener('click', function () {
+            var msg = document.getElementById('txtInput').value;
+            if (msg != '')
+                addStorage(msg);
+            selectStoraate();
+        });
+        //删除
+        var btndel = document.getElementById('btndel');
+        btndel.addEventListener('click', function () {
+            var msg = document.getElementById('txtInput').value;
+            if (msg != '')
+                delStorage(msg);
+            selectStoraate();
+        });
+        //查询
+        var btnsel = document.getElementById('btnsel');
+        btnsel.addEventListener('click', function () {
+            selectStoraate();
+        });
+        //清空
+        var btnclear = document.getElementById('btnclear');
+        btnclear.addEventListener('click', function () {
+            clearStorage();
+            selectStoraate();
+        })
+    </script>
+</body>
+</html>

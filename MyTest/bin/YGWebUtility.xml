@@ -1,0 +1,2117 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>YGWebUtility</name>
+    </assembly>
+    <members>
+        <member name="T:NSYGShop.CachedStrategy">
+            <summary>
+            缓存管理类
+            Jasen
+            2011.10.27
+            </summary>
+        </member>
+        <member name="T:NSYGShop.CouchBaseStrategy">
+            <summary>
+            采用CouchBase + Cache 方式
+            CouchBase类似永恒数据缓存，只有等Cache或程序来更新及删除
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.#ctor">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.#ctor(System.String,System.String)">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="F:NSYGShop.CouchBaseStrategy.updateSuffix">
+            <summary>
+            更新缓存时的更新标识
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.SetObject(System.String,System.Object)">
+            <summary>
+            重置缓存对象
+            不存在则创建，存在则替换
+            长期有效
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.SetObject(System.String,System.Object,System.Double)">
+            <summary>
+            重置缓存对象
+            不存在则创建，存在则替换
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="time">缓存时间：毫秒</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.AddObject(System.String,System.Object)">
+            <summary>
+            添加缓存对象
+            存在则会添加失败
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.AddObject(System.String,System.Object,System.Double)">
+            <summary>
+            添加缓存对象
+            存在则会添加失败
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="time">缓存时间：毫秒</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.RemoveObject(System.String)">
+            <summary>
+            移除缓存对象
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.IsExsits(System.String)">
+            <summary>
+            判断缓存对象是否已存在
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.GetObject(System.String,System.Object@)">
+            <summary>
+            获取缓存对象
+            取值成功则返回True
+            </summary>
+            <param name="key">键</param>
+            <param name="tmp">用来存值的变量</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.GetObject(System.String,System.Double,System.Object@)">
+            <summary>
+            获取缓存对象,并更新过期时间
+            取值成功则返回True
+            </summary>
+            <param name="key">键</param>
+            <param name="newTimeout">新的过期时间（毫秒）</param>
+            <param name="tmp">用来存值的变量</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.GetObject``1(System.String)">
+            <summary>
+            获取缓存对象
+            获值失败则返回default(T)
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseStrategy.GetCouchData``1(NSYGShop.MDLUpdateCouch,NSYGShop.CouchBaseStrategy.GetDataSourceDelegate{``0},System.Object[])">
+            <summary>
+            从缓存中获取数据
+            </summary>
+            <typeparam name="T">返回泛型数据</typeparam>
+            <param name="model">更新缓存的配置实体</param>
+            <param name="dtm">数据源调用方法</param>
+            <param name="paraList">数据源所需参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:NSYGShop.CouchBaseStrategy.GetDataSourceDelegate`1">
+            <summary>
+            获取数据库的数据源的委托
+            </summary>
+            <typeparam name="T">返回泛型数据</typeparam>
+            <param name="paraList">参数集合</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.ICachedStrategy.SetObject(System.String,System.Object,System.Int32)">
+            <summary>
+            添加当前对象到couch及本地缓存中
+            </summary>
+            <param name="objId">对象的键值</param>
+            <param name="o">缓存的对象</param>
+            <param name="couchTimeout">过期时间秒</param>
+        </member>
+        <member name="M:NSYGShop.ICachedStrategy.AddLocalObject(System.String,System.Object)">
+            <summary>
+            添加当前对象到本地缓存中
+            </summary>
+            <param name="objId">对象的键值</param>
+            <param name="o">缓存的对象</param>
+        </member>
+        <member name="M:NSYGShop.ICachedStrategy.RemoveObject(System.String)">
+            <summary>
+            删除缓存对象
+            </summary>
+            <param name="objId">对象的关键字</param>
+        </member>
+        <member name="M:NSYGShop.ICachedStrategy.RemoveLocalObject(System.String)">
+            <summary>
+            删除本地缓存对象
+            </summary>
+            <param name="objId">对象的关键字</param>
+        </member>
+        <member name="M:NSYGShop.ICachedStrategy.GetObject(System.String,System.Boolean,System.Int32,System.Object@)">
+            <summary>
+            返回指定的缓存内容
+            当本地缓存失效则会从couch取值更新本址缓存填充，但会返回false
+            </summary>
+            <param name="objId">缓存键名</param>
+            <param name="isFalseUpTimeout">当本地失效时是否更新couch的过期时间（当couch有效时）</param>
+            <param name="timeout">新的过期时间（秒）</param>
+            <param name="tmp">缓存的内容</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NSYGShop.ICachedStrategy.GetObject``1(System.String)">
+            <summary>
+            返回指定的缓存内容
+            当本地缓存失效则会从couch取值(有效时)更新本址缓存填充
+            </summary>
+            <param name="objId">缓存键名</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NSYGShop.ICachedStrategy.GetObject``1(NSYGShop.MDLUpdateCouch,NSYGShop.CouchBaseStrategy.GetDataSourceDelegate{``0},System.Object[])">
+            <summary>
+            返回一个指定的对象
+            </summary>
+            <param name="objId">对象的关键字</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NSYGShop.ICachedStrategy.GetLocalObject``1(System.String)">
+            <summary>
+            返回本地的一个指定的对象
+            </summary>
+            <param name="objId">对象的关键字</param>
+            <returns>对象</returns>
+        </member>
+        <member name="P:NSYGShop.ICachedStrategy.TimeOut">
+            <summary>
+            设置到期相对时间[单位: 秒] 
+            </summary>
+        </member>
+        <member name="F:NSYGShop.CachedStrategy._LockHelper">
+            <summary>
+            定义缓存ID对应的标识字符,存在则表正在更新
+            </summary>
+        </member>
+        <member name="F:NSYGShop.CachedStrategy._timeOut">
+            <summary>
+            默认缓存存活期为3600秒(1小时)
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.SetObject(System.String,System.Object,System.Int32)">
+            <summary>
+            添加当前对象到couch及本地缓存中
+            </summary>
+            <param name="objId">对象的键值</param>
+            <param name="o">缓存的对象</param>
+            <param name="couchTimeout">过期时间秒</param>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.AddLocalObject(System.String,System.Object)">
+            <summary>
+            添加当前对象到本地缓存中
+            </summary>
+            <param name="objId">对象的键值</param>
+            <param name="o">缓存的对象</param>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.RemoveObject(System.String)">
+            <summary>
+            删除缓存对象
+            </summary>
+            <param name="objId">对象的关键字</param>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.RemoveLocalObject(System.String)">
+            <summary>
+            删除本地缓存对象
+            </summary>
+            <param name="objId">对象的关键字</param>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.GetObject(System.String,System.Boolean,System.Int32,System.Object@)">
+            <summary>
+            返回指定的缓存内容
+            当本地缓存失效则会从couch取值更新本址缓存填充，但会返回false
+            </summary>
+            <param name="objId">缓存键名</param>
+            <param name="isFalseUpTimeout">当本地失效时是否更新couch的过期时间（当couch有效时）</param>
+            <param name="timeout">新的过期时间（秒）</param>
+            <param name="tmp">缓存的内容</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.GetObject``1(System.String)">
+            <summary>
+            返回指定的缓存内容
+            当本地缓存失效则会从couch取值(有效时)更新本址缓存填充
+            </summary>
+            <param name="objId">缓存键名</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.GetObject``1(NSYGShop.MDLUpdateCouch,NSYGShop.CouchBaseStrategy.GetDataSourceDelegate{``0},System.Object[])">
+            <summary>
+            返回一个指定的对象
+            </summary>
+            <param name="objId">对象的关键字</param>
+            <returns>对象</returns>
+        </member>
+        <member name="M:NSYGShop.CachedStrategy.GetLocalObject``1(System.String)">
+            <summary>
+            返回本地的一个指定的对象
+            </summary>
+            <param name="objId">对象的关键字</param>
+            <returns>对象</returns>
+        </member>
+        <member name="P:NSYGShop.CachedStrategy.TimeOut">
+            <summary>
+            设置到期相对时间[单位: 秒] 
+            </summary>
+        </member>
+        <member name="T:NSYGShop.CouchBaseClient">
+            <summary>
+            操作一级缓存的类，建议使用using实例化
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.#ctor">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.#ctor(System.Int32)">
+            <summary>
+            0:Couchbase型，1:纯内存型公共型，2:纯内存个体型
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.#ctor(System.String,System.String)">
+            <summary>
+            默认构造函数
+            </summary>
+        </member>
+        <member name="F:NSYGShop.CouchBaseClient.updateSuffix">
+            <summary>
+            更新缓存时的更新标识
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.SetObject(System.String,System.Object)">
+            <summary>
+            重置缓存对象
+            不存在则创建，存在则替换
+            长期有效
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.SetObject(System.String,System.Object,System.Double)">
+            <summary>
+            重置缓存对象
+            不存在则创建，存在则替换
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="time">缓存时间：毫秒</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.SetObject(System.String,System.Object,System.DateTime)">
+            <summary>
+            重置缓存对象
+            不存在则创建，存在则替换
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="expireTime">缓存过期具体时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.SetJsonObject(System.String,System.Object,System.Double)">
+            <summary>
+            重置缓存对象，适用Json对象
+            不存在则创建，存在则替换
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="time">缓存时间：毫秒</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.SetJsonObject(System.String,System.Object)">
+            <summary>
+            重置缓存对象,长期有效，适用Json对象
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.Increment(System.String,System.UInt64,System.UInt64,System.Double)">
+            <summary>
+            对缓存内容值自增，限ulong类型
+            </summary>
+            <param name="key">键</param>
+            <param name="defaultValue">不存在时默认值</param>
+            <param name="step">自增幅度</param>
+            <param name="time">缓存时间：毫秒</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.Increment(System.String,System.UInt64,System.UInt64)">
+            <summary>
+            对缓存内容值自增，限ulong类型
+            </summary>
+            <param name="key">键</param>
+            <param name="defaultValue">不存在时默认值</param>
+            <param name="step">自增幅度</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.AddObject(System.String,System.Object)">
+            <summary>
+            添加缓存对象
+            存在则会添加失败
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.AddObject(System.String,System.Object,System.Double)">
+            <summary>
+            添加缓存对象
+            存在则会添加失败
+            </summary>
+            <param name="key">键</param>
+            <param name="value">值</param>
+            <param name="time">缓存时间：毫秒</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.RemoveObject(System.String)">
+            <summary>
+            移除缓存对象
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.IsExsits(System.String)">
+            <summary>
+            判断缓存对象是否已存在
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.IsExsits(System.String,System.Double)">
+            <summary>
+            判断缓存对象是否已存在并设定过期时间
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.IsExsitsLoginInfo(System.String,System.Double,NSYGShop.MDLCouchLoginInfo@)">
+            <summary>
+            判断会员登录缓存对象是否存在并设定过期时间
+            </summary>
+            <param name="key">键</param>
+            <param name="newTimeout">新的过期时间（毫秒）</param>
+            <param name="value">存在时的缓存内容对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.GetObject(System.String,System.Object@)">
+            <summary>
+            获取缓存对象
+            取值成功则返回True
+            </summary>
+            <param name="key">键</param>
+            <param name="tmp">用来存值的变量</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.GetObject``1(System.String)">
+            <summary>
+            获取缓存对象
+            获值失败则返回default(T)
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.GetJson``1(System.String,``0@)">
+            <summary>
+            获取缓存对象
+            获值失败则返回default(T)
+            </summary>
+            <param name="key">键</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.GetCouchData``1(NSYGShop.MDLUpdateCouch,NSYGShop.CouchBaseClient.GetDataSourceDelegate{``0},System.Object[])">
+            <summary>
+            从缓存中获取数据
+            </summary>
+            <typeparam name="T">返回泛型数据</typeparam>
+            <param name="model">更新缓存的配置实体</param>
+            <param name="dtm">数据源调用方法</param>
+            <param name="paraList">数据源所需参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseClient.GetCouchJsonData``1(NSYGShop.MDLUpdateCouch,``0@,NSYGShop.CouchBaseClient.GetDataSourceDelegate{``0},System.Object[])">
+            <summary>
+            从缓存中获取数据，适用于Json对象数据
+            </summary>
+            <typeparam name="T">返回泛型数据</typeparam>
+            <param name="model">更新缓存的配置实体</param>
+            <param name="jsonData">获取的Json内容</param>
+            <param name="dtm">数据源调用方法</param>
+            <param name="paraList">数据源所需参数</param>
+            <returns></returns>
+        </member>
+        <member name="T:NSYGShop.CouchBaseClient.GetDataSourceDelegate`1">
+            <summary>
+            获取数据库的数据源的委托
+            </summary>
+            <typeparam name="T">返回泛型数据</typeparam>
+            <param name="paraList">参数集合</param>
+            <returns></returns>
+        </member>
+        <member name="F:NSYGShop.CouchBaseFactory._CouchbaseClient">
+            <summary>
+            内存加备份型公共缓存操作对象
+            </summary>
+        </member>
+        <member name="F:NSYGShop.CouchBaseFactory._CouchbaseClientHot">
+            <summary>
+            内存型公共缓存操作对象
+            </summary>
+        </member>
+        <member name="F:NSYGShop.CouchBaseFactory._CouchbaseClientUser">
+            <summary>
+            内存型个体缓存操作对象
+            </summary>
+        </member>
+        <member name="F:NSYGShop.CouchBaseFactory._CouchbaseClientEx">
+            <summary>
+            可用于临时创建缓存对象
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CouchBaseFactory.#cctor">
+            <summary>
+            静态初始化，可以进行默认设置
+            </summary>
+        </member>
+        <member name="M:NSYGShop.CouchBaseFactory.CreateClientHot">
+            <summary>
+            初始内存型公共缓存操作对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseFactory.CreateClientUser">
+            <summary>
+            初始内存型个体缓存操作对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.CouchBaseFactory.CreateClient(System.String,System.String)">
+            <summary>
+            创建新的CouchbaseClient实例对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NSYGShop.CouchBaseFactory.GetClient">
+            <summary>
+            获取CouchbaseClient实例对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NSYGShop.CouchBaseFactory.GetClientHot">
+            <summary>
+            获取CouchbaseClient实例对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NSYGShop.CouchBaseFactory.GetClientUser">
+            <summary>
+            获取CouchbaseClient实例对象
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityBase64.Encode(System.String,System.String)">
+            <summary>
+            编码
+            </summary>
+            <param name="code">原文</param>
+            <param name="T">字符编码类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityBase64.Decode(System.String,System.String)">
+            <summary>
+            解码
+            </summary>
+            <param name="code">密文(UTF-8|GB2312)</param>
+            <param name="T">字符编码类型</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityBase64.Encode(System.String)">
+            <summary>
+            编码
+            </summary>
+            <param name="code">原文</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityBase64.Decode(System.String)">
+            <summary>
+            解码
+            </summary>
+            <param name="code">密文</param>
+            <returns></returns>
+        </member>
+        <!-- 对于成员“T:NSYGShop.UtilityCryptography”忽略有格式错误的 XML 注释 -->
+        <member name="M:NSYGShop.UtilityCryptography.Encrypt(System.String,System.Int32)">
+            <summary>
+            SHA1(1)，MD5(2)加密,默认为UTF8字符集，返回的字母为大写
+            </summary>
+            <param name="sourceData">待加密的字符串</param>
+            <param name="T">1.sha1  2.md5</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.Encrypt(System.String,System.Int32,System.String)">
+            <summary>
+            SHA1(1)，MD5(2)加密,默认为UTF8字符集，返回的字母为大写
+            </summary>
+            <param name="sourceData">待加密的字符串</param>
+            <param name="T">1.sha1  2.md5</param>
+            <param name="encoding">字符集：utf8,gb2312</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.Encrypt(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            加密，公共函数
+            </summary>
+            <param name="sourceData">原文</param>
+            <param name="key">密钥1</param>
+            <param name="key">密钥2</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.Decrypt(System.String,System.Byte[],System.Byte[])">
+            <summary>
+            解密，公共函数
+            </summary>
+            <param name="sourceData">密文</param>
+            <param name="key">密钥1</param>
+            <param name="key">密钥2</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.Encrypt(System.String)">
+            <summary>
+            DES加密,默认密钥为配置文件中的cryKey
+            ,加密失败返回""值
+            </summary>
+            <param name="Text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.Encrypt(System.String,System.String)">
+            <summary> 
+            DES加密数据,加密失败返回""值
+            </summary> 
+            <param name="Text"></param> 
+            <param name="sKey"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.Decrypt(System.String)">
+            <summary>
+            DES解密,解密失败返回""值
+            默认密钥为配置文件中的cryKey
+            </summary>
+            <param name="Text"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.Decrypt(System.String,System.String)">
+            <summary> 
+            DES解密数据,解密失败返回""值
+            </summary> 
+            <param name="Text"></param> 
+            <param name="sKey"></param> 
+            <returns></returns> 
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.AESEncrypt(System.String,System.String)">
+            <summary>
+            AES加密
+            </summary>
+            <param name="toEncrypt">需要加密的字符串</param>
+            <param name="key">加密密钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.AESEncrypt(System.String)">
+            <summary>
+            AES加密(默认使用配置文件中的密钥)
+            </summary>
+            <param name="toEncrypt">需要加密的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.AESDecrypt(System.String,System.String)">
+            <summary>
+            AES解密
+            </summary>
+            <param name="toDecrypt">需要解密的字符串</param>
+            <param name="key">解密密钥</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityCryptography.AESDecrypt(System.String)">
+            <summary>
+            AES解密(默认使用配置文件中的密钥)
+            </summary>
+            <param name="toDecrypt">需要解密的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="T:NSYGShop.LogInfo">
+            <summary>
+            日志Model
+            </summary>
+        </member>
+        <member name="P:NSYGShop.LogInfo.LogMsg">
+            <summary>
+            日志主要信息
+            </summary>
+        </member>
+        <member name="P:NSYGShop.LogInfo.LogOtherMsg">
+            <summary>
+            日志附加信息
+            </summary>
+        </member>
+        <member name="P:NSYGShop.LogInfo.LogGrade">
+            <summary>
+            日志等级
+            </summary>
+        </member>
+        <member name="P:NSYGShop.LogInfo.LogType">
+            <summary>
+            日志分类
+            </summary>
+        </member>
+        <member name="P:NSYGShop.LogInfo.WebDomain">
+            <summary>
+            日志来源站点
+            </summary>
+        </member>
+        <member name="P:NSYGShop.LogInfo.PageUrl">
+            <summary>
+            日志来源页面地址
+            </summary>
+        </member>
+        <member name="F:NSYGShop.UtilityFile.LogSiteUrl">
+            <summary>
+            日志站点接收post日志的地址
+            </summary>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.AddLogMsg(System.String)">
+            <summary>
+            记录错误日志
+            </summary>
+            <param name="msg">日志描述信息</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.AddLogMsg(System.String,System.String)">
+            <summary>
+            记录正常跟踪日志
+            </summary>
+            <param name="logType">日志类型</param>
+            <param name="msg">日志描述信息</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.AddLogErrMsg(System.String,System.String)">
+            <summary>
+            记录错误跟踪日志
+            </summary>
+            <param name="logType">日志类型</param>
+            <param name="msg">日志描述信息</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.AddLogMsgToLogSys(NSYGShop.LogInfo)">
+            <summary>
+            提交日志信息至日志系统
+            </summary>
+            <param name="model">日志信息Model</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.AddLogMsgToLogSysEx(NSYGShop.LogInfo)">
+            <summary>
+            提交日志信息至日志系统,各项均需自定义
+            </summary>
+            <param name="model">日志信息Model</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.AddLogMsgEx(System.String)">
+            <summary>
+            记录错误日志，/log目录下
+            </summary>
+            <param name="msg">描述信息，即保存到日志文件里的信息</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.CheckFile(System.String)">
+            <summary>
+            检查文件是否存在
+            </summary>
+            <param name="vritualPath">相对路径</param>
+            <returns>存在：true</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.ReadFile(System.String)">
+            <summary>
+            读取某文本文件的所有内容
+            </summary>
+            <param name="vritualPath">相对路径</param>
+            <returns>返回文本内容</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.ReadFile(System.String,System.String)">
+            <summary>
+            读取某文本文件的所有内容, 不存在返回默认内容
+            </summary>
+            <param name="vritualPath">相对路径</param>
+            <param name="defaultStr">当文件不存在时返回指定内容</param>
+            <returns>返回文本内容</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.ReadFile(System.String,System.String,System.String)">
+            <summary>
+            读取某文本文件的所有内容, 可以指定分隔符，取其中的一段内容
+            </summary>
+            <param name="vritualPath">相对路径</param>
+            <param name="separators">分隔符</param>
+            <param name="defaultStr">当文件不存在时返回指定内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.WriteMsg(System.String,System.String,System.Boolean)">
+            <summary>
+            保存文件内容到指定的文件
+            </summary>
+            <param name="fileUrl">文件完整的物理路径包括文件名</param>
+            <param name="msg">内容</param>
+            <param name="isAppend">是否追加内容(false:覆盖)</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.DeleteFile(System.String)">
+            <summary>
+            删除文件，含检查文件是否存在
+            </summary>
+            <param name="vritualPath">相对路径</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.ExistsPath(System.String,System.Boolean)">
+            <summary>
+            检查目录是否存在
+            </summary>
+            <param name="phyPath">目录绝对物理地址</param>
+            <param name="isCreate">不存在是否创建目录</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.GetHtmlLabelContent(System.String,System.String)">
+            <summary>
+            抓取HTML文本中标识对中的内容
+            </summary>
+            <param name="text">HTML文本内容</param>
+            <param name="label">标记字符（如：title则取{title}与{/title}之间的内容）</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.WriteFile(System.String,System.String,System.Boolean)">
+            <summary>
+            新建或覆盖文件,按Encoding.GetEncoding(936)保存
+            </summary>
+            <param name="fileUrl">文件虚拟路径(/xxx/xxx.xxx)</param>
+            <param name="contents">文件内容</param>
+            <param name="append">true:存在则追加，flase: 覆盖文件</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFile.CreateLogXml(NSYGShop.LogInfo)">
+            <summary>
+            创建日志xml内容
+            </summary>
+            <param name="model">日志信息</param>
+            <returns></returns>
+        </member>
+        <!-- 对于成员“T:NSYGShop.UtilityFun”忽略有格式错误的 XML 注释 -->
+        <member name="F:NSYGShop.UtilityFun.MinDTValue">
+            <summary>
+            定义系统中使用最小的日期值，以便兼容数据库或其它系统的最小日期范围
+            </summary>
+        </member>
+        <member name="F:NSYGShop.UtilityFun.OfficialExpVal">
+            <summary>
+            1yyg官方经验值
+            </summary>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.CutString(System.String,System.Int32,System.Boolean)">
+            <summary>
+            字符串截取函数
+            </summary>
+            <param name="inputString">要被截取的字符串</param>
+            <param name="len">截取长度（字符数）</param>
+            <param name="points">是否显示半个省略号</param>
+            <returns>返回截取的字符串</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.DelSQLKey(System.String)">
+            <summary>
+            去掉影响SQL的字符
+            </summary>
+            <param name="str">接受检查的字符串</param>
+            <returns>去除SQL关键字符后的字符串</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.FillNullStr(System.String,System.String)">
+            <summary>
+            转换成字符串，为空则用默认值代替
+            </summary>
+            <param name="str">要检查的字符串</param>
+            <param name="value">默认代替字符串</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetConfigStr(System.String)">
+            <summary>
+            获取配置文件中的AppSettings健值
+            </summary>
+            <param name="key">配置值的项名</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetHideMobileStr(System.String)">
+            <summary>
+            返回加*号的手机号码
+            </summary>
+            <param name="mobile">手机号</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetHideEmailStr(System.String)">
+            <summary>
+            返回加*号的邮箱地址
+            </summary>
+            <param name="email">邮箱地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetHidenUserName(System.Object,System.Object)">
+            <summary>
+            获取符合前台显示的用户名
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="email">邮箱</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetHidenUserName(System.Object,System.Object,System.Object)">
+            <summary>
+            获取符合前台显示的用户名(优先显示顺序：昵称-手机号-邮箱)
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="email">邮箱</param>
+            <param name="nickName">昵称</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetHidenUserName(System.Object,System.Object,System.Object,System.Int32)">
+            <summary>
+            获取符合前台显示的用户名(优先显示顺序：昵称-手机号-邮箱)
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="email">邮箱</param>
+            <param name="nickName">昵称</param>
+            <param name="nameLen">昵称截取长度，若为0代表不截取</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetShowUserName(System.Object,System.Object,System.Object)">
+            <summary>
+            获取符合前台显示的用户名(优先显示顺序：昵称-手机号-邮箱)
+            </summary>
+            <param name="mobile">手机号</param>
+            <param name="email">邮箱</param>
+            <param name="nickName">昵称</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetUserGradeName(System.Int32)">
+            <summary>
+            获取会员等级名称
+            </summary>
+            <param name="expValue">经验值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetUserGradeInfo(System.Int32)">
+            <summary>
+            获取会员等级名称 [0]:等级编号；[1]:等级名称；[2]:距离升级提示语
+            </summary>
+            <param name="expValue">经验值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetPhyPath(System.String)">
+            <summary>
+            获取相对文件路径的绝对物理路径
+            </summary>
+            <param name="nameStr">配置值的项名</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetUserIP">
+            <summary>
+            返回客户端的IP地址，已过滤保留及内网网段IP
+            </summary>
+            <returns>真实客户端IP</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetUserIP(System.Boolean)">
+            <summary>
+            返回客户端的IP地址 先获取REMOTE_ADDR，UserHostAddress再获取FORWARDED_FOR
+            </summary>
+            <param name="excludeLanIP">是否排除保留及内网网段IP</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetHostIP">
+            <summary>
+            返回服务器的IP地址
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetIntIP">
+            <summary>
+            返回客户端的IP地址数值，直取UserHostAddress值，主要用于防护业务方面
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetIntIP(System.String)">
+            <summary>
+            返回客户端的IP地址数值
+            </summary>
+            <param name="ip">IP地址（格式：255.255.255.255）</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetRndNumberLen(System.Int32,System.Int32)">
+            <summary>
+            获取指定长度范围的随机整数
+            </summary>
+            <param name="minLen">下限大于0</param>
+            <param name="maxLen">上限小于等于6</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsIPAddress(System.String)">
+            <summary>
+            判断是否是合法的IP地址
+            </summary>
+            <param name="ip">要检查的IP字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsIPAddress(System.String,System.Boolean)">
+            <summary>
+            判断是否是合法的IP地址
+            </summary>
+            <param name="ip">要检查的IP字符串</param>
+            <param name="excludeLanIP">是否排除保留及内网IP地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsEmail(System.String)">
+            <summary>
+            判断是否是合法的Email地址
+            </summary>
+            <param name="input">要检查的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsUserName(System.String)">
+            <summary>
+            判断是否是合法的用户昵称
+            </summary>
+            <param name="input">要检查的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsEmptyString(System.String)">
+            <summary>
+            检查字符串是否为空
+            </summary>
+            <param name="str">要检查的字符串</param>
+            <returns>为空返回true;否则返回false;</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsMobile(System.String)">
+            <summary>
+            判断是否是合法的手机号码
+            </summary>
+            <param name="input">要检查的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.RestoreSQLKey(System.String)">
+            <summary>
+            恢复影响SQL的字符
+            </summary>
+            <param name="str">接受检查的字符串</param>
+            <returns>恢复SQL关键字符后的字符串</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.StripHTML(System.String)">
+            <summary>
+            去除HTML标记
+            </summary>
+            <param name="strHtml">包括HTML的源码</param>
+            <returns>已经去除后的文字</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ReplaceHtmlTag(System.String)">
+            <summary>
+            替换HTML标记
+            </summary>
+            <param name="htmlContent">HTML内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ClearHtmlTag(System.String)">
+            <summary>
+            清除HTML标记
+            </summary>
+            <param name="htmlContent">HTML内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.KeepUBBSpecifyTag(System.String,System.String,System.Boolean)">
+            <summary>
+            先清除Html标识，再保留指定的UBBCode标记
+            </summary>
+            <param name="htmlContent">HTML格式内容</param>
+            <param name="ubbRegex">UBB标记：为空则默认为（@"\[((/?(br|b|url|img|s:\d+)|([^\]]*))[^\]]*)\]"）</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.StrToHTML(System.String)">
+            <summary>
+            把含有特殊字符的字符串转义为HTML显示
+            </summary>
+            <param name="str">含有特殊字符的字符串</param>
+            <returns>转义后的字符串</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ThrowError(System.String)">
+            <summary>
+            抛出异常
+            </summary>
+            <param name="err">异常说明信息</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToDateTime(System.String)">
+            <summary>
+            把字符串转换成日期类型,出错返回最小日期
+            </summary>
+            <param name="vDateTime">日期字符串</param>
+            <returns>转换后的日期</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToDateTime(System.Object)">
+            <summary>
+            把字符串转换成日期类型,出错返回最小日期
+            </summary>
+            <param name="vDateTime">日期对象</param>
+            <returns>转换后的日期</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToDateTime(System.String,System.Nullable{System.DateTime})">
+            <summary>
+            把字符串转换成日期类型,出错返回null值
+            </summary>
+            <param name="vDateTime">日期字符串</param>
+            <returns>转换后的日期</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToReplace(System.String,System.String,System.String)">
+            <summary>
+            替换指定字符
+            </summary>
+            <param name="str1">要替换的字符串</param>
+            <param name="str2">要查找的字符串</param>
+            <param name="str3">用来代替的字符串</param>
+            <returns>替换后的字符串</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToReplaceStyle(System.Text.RegularExpressions.Match)">
+            <summary>
+            返回替换字符的新样式
+            </summary>
+            <param name="m"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToReplace(System.String,System.String,System.Char)">
+            <summary>
+            对搜索关键字替换
+            </summary>
+            <param name="vStr">将被替换的字符串</param>
+            <param name="vCharVar">用来替换的字符串</param>
+            <param name="vChar">用来分割vCharVar字符串的标识</param>
+            <returns>替换后的字符串</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToReplaceAjaxChar(System.String)">
+            <summary>
+            替换单引号字符
+            </summary>
+            <param name="str1">要替换的字符串</param>
+            <returns>替换后的字符串</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.UrlEncode(System.String)">
+            <summary>
+            对指定的Url编码，便于传输
+            </summary>
+            <param name="str">路径地址</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.UrlDecode(System.String)">
+            <summary>
+            对指定的Url解码
+            </summary>
+            <param name="str">路径地址</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.UrlDomainSafe(System.String)">
+            <summary>
+            检查是不是本网站的页面发出的请求
+            </summary>
+            <param name="domainStr">需要验证的域名字符串</param>
+            <returns>是则返回true;</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetOrderStatusTxt(System.Int32)">
+            <summary>
+            获取订单状态说明文本
+            </summary>
+            <param name="status">当前状态（数据库）</param>
+            <returns>订单状态说明文本</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.Get32BitGuid">
+            <summary>
+            返回32位，无“-”的Guid序列
+            </summary>
+            <returns>Guid</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetRndStrLen(System.Int32,System.Int32)">
+            <summary>
+            获取指定长度范围的随机字符数字串
+            </summary>
+            <param name="minLen">下限</param>
+            <param name="maxLen">上限小于等于30</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToReplaceSpace(System.String)">
+            <summary>
+            清除首尾空格，中间的连接空格替换为一个空格
+            </summary>
+            <param name="str">要替换的字符串</param>
+            <returns>替换后的字符串</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ConvertTimeToShow(System.DateTime)">
+            <summary>
+            转换时间显示方式
+            </summary>
+            <param name="time">时间</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ConvertTimeToShow(System.Object,System.String)">
+            <summary>
+            转换时间显示方式
+            </summary>
+            <param name="time">时间</param>
+            <param name="format">时间格式化</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ConvertTimeToShow(System.DateTime,System.String)">
+            <summary>
+            转换时间显示方式
+            </summary>
+            <param name="time">时间</param>
+            <param name="format">时间格式化</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ConvertTimeToShow(System.DateTime,System.Int32)">
+            <summary>
+            转换时间显示方式
+            </summary>
+            <param name="time">时间</param>
+            <param name="timeBelow">最低分钟数，小于此数则显示为“刚刚”</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ConvertTimeToShow(System.Object,System.Int32)">
+            <summary>
+            转换时间显示方式
+            </summary>
+            <param name="time">时间</param>
+            <param name="timeBelow">最低分钟数，小于此数则显示为“刚刚”</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ConvertTimeToShow(System.DateTime,System.String,System.Int32)">
+            <summary>
+            转换时间显示方式
+            </summary>
+            <param name="time">时间</param>
+            <param name="format">时间格式化</param>
+            <param name="timeBelow">最低分钟数，小于此数则显示为“刚刚”</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ConvertTimeToShow(System.Object)">
+            <summary>
+            转换为友好的时间显示
+            </summary>
+            <param name="time"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.OutHeader(System.String,System.String)">
+            <summary>
+            输出头部需加载的样式及脚本 config中需配置skinHttpUrl,headStyle,jqueryVersion三项值
+            </summary>
+            <param name="pageCss">页面样式路径，多个可用英文逗号隔开(/yy/xxx.css?v=xxx)</param>
+            <param name="pageJS">页面脚本路径(/yy/xxx.js)</param>
+            <returns></returns>
+        </member>
+        <!-- 对于成员“M:NSYGShop.UtilityFun.OutHeader(System.String,System.String,System.Boolean)”忽略有格式错误的 XML 注释 -->
+        <member name="M:NSYGShop.UtilityFun.ConvertToTimeStr(System.Object)">
+            <summary>
+            把时间转换为字符串(yyyy-MM-dd HH:mm:ss.fff)
+            </summary>
+            <param name="time">时间值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ConvertToTimeStrEx(System.Object)">
+            <summary>
+            把时间转换为字符串(yyyy-MM-dd HH:mm:ss.ff/fff) 根据config配置的时间比较，早于则显示2位,否则显示3位
+            </summary>
+            <param name="time">时间值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ConvertToTimeVal(System.Object)">
+            <summary>
+            把时间转换为九位数字(HHmmssfff)
+            </summary>
+            <param name="time">字符型式时间值可由ConvertToTimeStr转换后做为参数</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetProgressBar(System.Object,System.Object)">
+            <summary>
+            根据总人次及云购人次输出进度条Html内容
+            </summary>
+            <param name="sales">已云购人次</param>
+            <param name="quantity">总需云购人次</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetProgressBarNew(System.Object,System.Object)">
+            <summary>
+            【改版】根据总人次及云购人次输出进度条Html内容
+            </summary>
+            <param name="sales">已云购人次</param>
+            <param name="quantity">总需云购人次</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetBarcodeSuplus(System.Object,System.Object)">
+            <summary>
+            计算剩余人次
+            </summary>
+            <param name="quantity">总需人次</param>
+            <param name="sales">已销售人次</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsPayPassword(System.String)">
+            <summary>
+            检测是否符合条件的支付密码 6位数字
+            </summary>
+            <param name="paypwd"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsTelephone(System.String)">
+            <summary>
+            判断是否合法的座机
+            </summary>
+            <param name="input">要检查的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsLoginPassword(System.String)">
+            <summary>
+            检测账户登录密码是否符合条件
+            </summary>
+            <param name="password">登录密码</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.CheckConsignee(System.String,System.Int32@)">
+            <summary>
+            检测收货人是否符合条件
+            </summary>
+            <param name="Consignee">收货人</param>
+            <param name="ErrorCode">错误代码(-1为空,-2长度不是2-5,-3不是中文，-4以非法字符开头，-5包含非法字符)</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.CheckAddressDetails(System.String)">
+            <summary>
+            检测收货详细地址是否符合条件
+            </summary>
+            <param name="Address">详细地址</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetHideIdCard(System.String)">
+            <summary>
+            返回加*号的身份证号码
+            </summary>
+            <param name="idCard">身份证号码</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsPostcode(System.String)">
+            <summary>
+            检测是否为合法的邮编
+            </summary>
+            <param name="postcode">邮编</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.IsQQ(System.String)">
+            <summary>
+            检测是否为合法的QQ号
+            </summary>
+            <param name="qq">QQ号</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.SetCookie(System.String,System.String,System.String,System.Int32,System.Boolean)">
+            <summary>
+            创建Cookies
+            </summary>
+            <param name="strName">Cookie 主键</param>
+            <param name="strValue">Cookie 键值</param>
+            <param name="domain">Cookie 域范围，空则不设置域即为本域</param>
+            <param name="strMinutes">Cookie过期 分钟,为0时即相当于会话，关闭页面就失效</param>
+            <param name="encrypt">Cookie 是否启用加密</param>
+            <code>Cookie ck = new Cookie();</code>
+            <code>ck.setCookie("主键","键值","域范围","分钟","是否启用加密");</code>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.SetCookie(System.String,System.String,System.String,System.DateTime,System.Boolean)">
+            <summary>
+            创建Cookies
+            </summary>
+            <param name="strName">Cookie 主键</param>
+            <param name="strValue">Cookie 键值</param>
+            <param name="domain">Cookie 域范围，空则不设置域即为本域</param>
+            <param name="expires">Cookie过期绝对时间</param>
+            <param name="encrypt">Cookie 是否启用加密</param>
+            <code>Cookie ck = new Cookie();</code>
+            <code>ck.setCookie("主键","键值","域范围","分钟","是否启用加密");</code>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetCookie(System.String,System.Boolean)">
+            <summary>
+            读取Cookies,无则返回空字符串""
+            </summary>
+            <param name="strName">Cookie 主键</param>
+            <param name="decrypt">Cookie 是否启用解密</param>
+            <code>Cookie ck = new Cookie();</code>
+            <code>ck.getCookie("主键","是否加密类型");</code>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.DelCookie(System.String,System.String)">
+            <summary>
+            删除Cookies
+            </summary>
+            <param name="strName">Cookie 主键</param>
+            <param name="domain">Cookie 域范围，空则不设置域即为本域</param>
+            <code>Cookie ck = new Cookie();</code>
+            <code>ck.delCookie("主键");</code>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.setCookieExpires(System.String,System.String,System.Int32)">
+            <summary>
+            删除Cookies
+            </summary>
+            <param name="strName">Cookie 主键</param>
+            <param name="domain">Cookie 所属域，空则不设置域即为本域</param>
+            <param name="strMinutes">Cookie 过期时间分钟</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToDecimal(System.Object)">
+            <summary>
+            把对象转换成Decimal,非Decimal字符串返回0m
+            </summary>
+            <param name="refVal">要转换的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToDecimal(System.String)">
+            <summary>
+            把字符串转换成Decimal,非Decimal字符串返回0m
+            </summary>
+            <param name="refVal">要转换的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToInt32(System.Object)">
+            <summary>
+            把对象转换成整型,非整型字符串返回0
+            </summary>
+            <param name="refVal">要转换的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToInt32(System.String)">
+            <summary>
+            把字符串转换成整型,非整型字符串返回0
+            </summary>
+            <param name="refVal">要转换的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToInt64(System.Object)">
+            <summary>
+            把对象转换成整型,非整型字符串返回0
+            </summary>
+            <param name="refVal">要转换的对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToInt64(System.String)">
+            <summary>
+            把字符串转换成整型,非整型字符串返回0
+            </summary>
+            <param name="refVal">要转换的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToNumber(System.String,System.Int32)">
+            <summary>
+            把字符串转换成整型
+            </summary>
+            <param name="refVal">要转换的字符串</param>
+            <param name="defaultVal">转换失败的缺省值</param>
+            <returns>转换后的整型</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToNumber(System.String,System.Int64)">
+            <summary>
+            把字符串转换成整型
+            </summary>
+            <param name="refVal">要转换的字符串</param>
+            <param name="defaultVal">转换失败的缺省值</param>
+            <returns>转换后的整型</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToNumber(System.String,System.Decimal)">
+            <summary>
+            把字符串转换成Decimal类型，失败以defaultVal填充
+            </summary>
+            <param name="refVal">要转换的字符串</param>
+            <param name="defaultVal">转换失败的缺省值</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ToDouble(System.String)">
+            <summary>
+            把字符串转换成ToDouble类型
+            </summary>
+            <param name="refVal">要转换的字符串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetHttpUrlAndQuery">
+            <summary>
+            获取当前请求的网址及GET参数
+            Request.Url.PathAndQuery
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ReqNum(System.String,System.Int32)">
+            <summary>
+            获取http传的变量值转32位整型值
+            </summary>
+            <param name="paraName">变量名</param>
+            <param name="defaultVal">缺省值 int</param>
+            <returns>0</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ReqNum(System.String,System.Decimal)">
+            <summary>
+            获取http传的变量值转Decimal值
+            </summary>
+            <param name="paraName">变量名</param>
+            <param name="defaultVal">缺省值 decimal</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ReqNum(System.String,System.Int64)">
+            <summary>
+            获取http传的变量值转32位整型值
+            </summary>
+            <param name="paraName">变量名</param>
+            <param name="defaultVal">缺省值 int</param>
+            <returns>0</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ReqStr(System.String,System.String)">
+            <summary>
+            正常获取传递过来页面参数
+            </summary>
+            <param name="paraName">参数名称</param>
+            <param name="defaultVar">缺省值</param>
+            <returns>根据传递的值，若为空返回缺省值</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.ReqStrSQL(System.String,System.String)">
+            <summary>
+            正常获取传递过来页面参数，并去掉影响SQL的字符
+            </summary>
+            <param name="paraName">参数名称</param>
+            <param name="defaultVar">缺省值</param>
+            <returns>根据传递的值，若为空返回缺省值</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.Request(System.String)">
+            <summary>
+            获取http发送过来的数据
+            </summary>
+            <param name="keyName">要获取的变量名</param>
+            <returns>返回变量名的值</returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.HttpPostXml(System.String,System.String)">
+            <summary>
+            http发送post请求，往日志系统站点写入xml日志内容
+            </summary>
+            <param name="url">日志系统站点接收地址</param>
+            <param name="postXml">post的xml内容</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.SendHttpRequest(System.String,System.String)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="url">Url地址</param>
+            <param name="data">数据</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.GetData(System.String)">
+            <summary>
+            
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.SendPostHttpRequest(System.String,System.String,System.String)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="url">Url地址</param>
+            <param name="method">方法（post或get）</param>
+            <param name="method">数据类型</param>
+            <param name="requestData">数据</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.SendGetHttpRequest(System.String,System.String)">
+            <summary>
+            发送请求
+            </summary>
+            <param name="url">Url地址</param>
+            <param name="method">方法（post或get）</param>
+            <param name="method">数据类型</param>
+            <param name="requestData">数据</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.HttpGetRequest(System.String)">
+            <summary>
+            httpGet请求，返回请求结果字符串
+            </summary>
+            <param name="url"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.Printf(System.String)">
+            <summary>
+            输出函数
+            </summary>
+            <param name="str">要输出的字符</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.PrintfLine(System.String)">
+            <summary>
+            输出函数并换行
+            </summary>
+            <param name="str">要输出的字符</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.PrintfEnd(System.String)">
+            <summary>
+            输出String类型并终止页面执行
+            </summary>
+            <param name="str">要输出的字符</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.PrintfEnd">
+            <summary>
+            终止页面输出
+            </summary>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.Redirect(System.String)">
+            <summary>
+            跳转到指定的URL并终止页面执行
+            </summary>
+            <param name="str">路径地址</param>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.SetNoCache">
+            <summary>
+            去浏览器缓存信息
+            </summary>
+        </member>
+        <member name="M:NSYGShop.UtilityFun.SetUnZip">
+            <summary>
+            设置不压缩文档输出
+            </summary>
+        </member>
+        <member name="P:NSYGShop.UtilityFun.RaffMillTime">
+            <summary>
+            三位毫秒启用时间
+            </summary>
+        </member>
+        <member name="T:NSYGShop.UtilityHttp">
+            <summary>
+            http、https通信类，建议用用using实例化
+            </summary>
+        </member>
+        <member name="M:NSYGShop.UtilityHttp.Dispose">
+            <summary>
+            释放资源
+            </summary>
+        </member>
+        <member name="P:NSYGShop.UtilityHttp.CookieCon">
+            <summary>
+            httprequest CookieContainer
+            </summary>
+        </member>
+        <member name="T:NSYGShop.UtilityIM">
+            <summary>
+            IM服务工具类
+            web.config需配置f5IMAddr(IP:Port)
+            </summary>
+        </member>
+        <member name="M:NSYGShop.UtilityIM.SendMsgToIMServer(System.String)">
+            <summary>
+            发送消息到IM服务器
+            -1失败，-2程序异常，-3默认，-4连接服务失败，-5连接地址端口配置有误
+            </summary>
+            <param name="sendJson">需要发送的JSON串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityIM.SendMsgToIMServer(System.String,System.Boolean)">
+            <summary>
+            发送消息到IM服务器
+            -1失败，-2程序异常，-3默认，-4连接服务失败，-5连接地址端口配置有误
+            </summary>
+            <param name="sendJson">需要发送的JSON串</param>
+            <param name="isWriteMsg">是否打印发送与接收的消息</param>
+            <returns></returns>
+        </member>
+        <member name="T:NSYGShop.MdlImResult">
+            <summary>
+            好友申请IM返回数据
+            </summary>
+        </member>
+        <member name="M:NSYGShop.UtilityJson.DataSetToJson(System.Data.DataSet)">
+            <summary>
+            dataSet转换成Json格式 
+            </summary>
+            <param name="ds">要转行的DataSet</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityJson.DataSetToJson(System.String,System.Data.DataSet)">
+            <summary>
+            dataSet转换成Json格式 
+            </summary>
+            <param name="code">代号</param>
+            <param name="ds">要转行的DataSet</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityJson.DataTableToJson(System.Data.DataTable)">
+            <summary>  
+            dataTable转换成Json格式  
+            </summary>  
+            <param name="dt"></param>  
+            <returns></returns>  
+        </member>
+        <member name="M:NSYGShop.UtilityJson.DataTableToJson(System.String,System.Data.DataTable)">
+            <summary>
+            dataTable转换成Json格式 
+            </summary>
+            <param name="code"></param>
+            <param name="jsonName"></param>
+            <param name="dt"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityJson.SafeJsonValue(System.String)">
+            <summary>
+            将字符串转换为JSON格式字符，以双引号为间隔符，返回内容不含前后双引号边界
+            </summary>
+            <param name="str">源串</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityJson.SafeJsonValue(System.String,System.Boolean)">
+            <summary>
+            将字符串转换为安全的JSON格式值，返回内容不含前后双引号边界
+            </summary>
+            <param name="str">源串</param>
+            <param name="isSingleQuote">true:以单引号为间隔符；false:标准双引号为间隔符</param>
+            <returns></returns>
+        </member>
+        <member name="T:NSYGShop.UtilityXML">
+            <summary>
+            FileName: XMLHelper
+            Author: ziyou
+            Create Date: 2008-9-28
+            Email: ysli_195@163.com
+            Version: 1.0.0.3
+            Rewrite: 2009-2-3
+            </summary>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.xmlDoc(System.String)">
+            <summary>
+            创建一个XmlDocument对象
+            </summary>
+            <param name="PathOrString">文件名称或XML字符串</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.CreateXMLFile(System.String,System.String,System.String,NSYGShop.XmlParameter[])">
+            <summary>
+            创建一个XML文档
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="rootName">根结点名称</param>
+            <param name="elemName">元素节点名称</param>
+            <param name="paras">XML参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.CreateXMLFile(System.String,System.String,NSYGShop.XmlParameter,NSYGShop.XmlParameter[])">
+            <summary>
+            创建一个XML文档
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="rootName">根结点名称</param>
+            <param name="elemp">元素节点对象</param>
+            <param name="paras">XML参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.CreateXMLFile(System.String,NSYGShop.XmlParameter,System.String,NSYGShop.XmlParameter[])">
+            <summary>
+            创建一个XML文档
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="rootp">根结点对象</param>
+            <param name="elemName">元素节点名称</param>
+            <param name="paras">XML参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.CreateXMLFile(System.String,NSYGShop.XmlParameter,NSYGShop.XmlParameter,NSYGShop.XmlParameter[])">
+            <summary>
+            创建一个XML文档
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="rootp">根结点对象</param>
+            <param name="elemp">元素节点对象</param>
+            <param name="paras">XML参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddNewNode(System.String,System.Xml.XmlNode,NSYGShop.XmlParameter[])">
+            <summary>
+            添加新节点
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="parentNode">新节点的父节点对象</param>
+            <param name="paras">XML参数对象</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddNewNode(System.Xml.XmlDocument,System.Xml.XmlNode,NSYGShop.XmlParameter[])">
+            <summary>
+            添加新节点
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="parentNode">新节点的父节点对象</param>
+            <param name="paras">XML参数对象</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddNewNode(System.Xml.XmlDocument,System.String,NSYGShop.XmlParameter[])">
+            <summary>
+            添加新节点
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="parentName">新节点的父节点名称</param>
+            <param name="paras">XML参数对象</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddNewNode(System.String,System.String,NSYGShop.XmlParameter[])">
+            <summary>
+            添加新节点
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="parentName">新节点的父节点名称</param>
+            <param name="paras">XML参数对象</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddAttribute(System.Xml.XmlDocument,System.Xml.XmlNode,System.String,System.String,System.String)">
+            <summary>
+            添加节点属性
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="node">节点对象</param>
+            <param name="namespaceOfPrefix">该节点的命名空间URI</param>
+            <param name="attributeName">新属性名称</param>
+            <param name="attributeValue">属性值</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddAttribute(System.Xml.XmlDocument,System.Xml.XmlNode,System.String,NSYGShop.AttributeParameter[])">
+            <summary>
+            添加节点属性
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="node">节点对象</param>
+            <param name="namespaceOfPrefix">该节点的命名空间URI</param>
+            <param name="attps">节点属性参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddAttribute(System.String,System.Xml.XmlNode,System.String,System.String,System.String)">
+            <summary>
+            添加节点属性
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="node">节点对象</param>
+            <param name="namespaceOfPrefix">该节点的命名空间URI</param>
+            <param name="attributeName">新属性名称</param>
+            <param name="attributeValue">属性值</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddAttribute(System.String,System.Xml.XmlNode,System.String,NSYGShop.AttributeParameter[])">
+            <summary>
+            添加节点属性
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="node">节点对象</param>
+            <param name="namespaceOfPrefix">该节点的命名空间URI</param>
+            <param name="attps">节点属性参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddAttribute(System.Xml.XmlDocument,System.String,System.String,System.String,System.String)">
+            <summary>
+            添加节点属性
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="nodeName">节点名称</param>
+            <param name="namespaceOfPrefix">该节点的命名空间URI</param>
+            <param name="attributeName">新属性名称</param>
+            <param name="attributeValue">属性值</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddAttribute(System.Xml.XmlDocument,System.String,System.String,NSYGShop.AttributeParameter[])">
+            <summary>
+            添加节点属性
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="nodeName">节点名称</param>
+            <param name="namespaceOfPrefix">该节点的命名空间URI</param>
+            <param name="attps">节点属性参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddAttribute(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            添加节点属性
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="nodeName">节点名称</param>
+            <param name="namespaceOfPrefix">该节点的命名空间URI</param>
+            <param name="attributeName">新属性名称</param>
+            <param name="attributeValue">属性值</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.AddAttribute(System.String,System.String,System.String,NSYGShop.AttributeParameter[])">
+            <summary>
+            添加节点属性
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="nodeName">节点名称</param>
+            <param name="namespaceOfPrefix">该节点的命名空间URI</param>
+            <param name="attps">节点属性参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNode(System.String,System.String)">
+            <summary>
+            获取指定节点名称的节点对象
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="nodeName">节点名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNode(System.Xml.XmlNode,System.String)">
+            <summary>
+            获取指定节点名称的节点对象
+            </summary>
+            <param name="node">节点对象</param>
+            <param name="nodeName">节点名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNode(System.Xml.XmlDocument,System.String)">
+            <summary>
+            获取指定节点名称的节点对象
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="nodeName">节点名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNode(System.Xml.XmlDocument,System.Int32,System.String)">
+            <summary>
+            获取指定节点名称的节点对象
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="Index">节点索引</param>
+            <param name="nodeName">节点名称</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNode(System.String,System.Int32,System.String)">
+            <summary>
+            获取指定节点名称的节点对象
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="Index">节点索引</param>
+            <param name="nodeName">节点名称</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNode(System.Xml.XmlNode,System.String,System.String)">
+            <summary>
+            获取指定节点名称的节点对象
+            </summary>
+            <param name="node">节点对象</param>
+            <param name="nodeName">节点名称</param>
+            <param name="innerText">节点内容</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNode(System.Xml.XmlDocument,System.String,System.String)">
+            <summary>
+            获取指定节点名称的节点对象
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="nodeName">节点名称</param>
+            <param name="innerText">节点内容</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNode(System.Xml.XmlDocument,NSYGShop.XmlParameter)">
+            <summary>
+            获取指定节点名称的节点对象
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="xpar">XML参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNode(System.Xml.XmlNode,NSYGShop.XmlParameter)">
+            <summary>
+            获取指定节点名称的节点对象
+            </summary>
+            <param name="node">节点对象</param>
+            <param name="xpar">XML参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNodeValue(System.Xml.XmlNode)">
+            <summary>
+            获取节点值
+            </summary>
+            <param name="node">节点对象</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.GetNodeValue(System.Xml.XmlDocument,System.String)">
+            <summary>
+            获取指定节点名称的节点值
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="nodeName">节点名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.UpdateNode(System.Xml.XmlNode,NSYGShop.XmlParameter)">
+            <summary>
+            修改节点的内容
+            </summary>
+            <param name="node">修改的节点对象</param>
+            <param name="para">XML参数对象</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.UpdateNode(System.Xml.XmlNode,System.Int32,System.String)">
+            <summary>
+            修改节点的内容
+            </summary>
+            <param name="node">父节点对象</param>
+            <param name="childIndex">该节点的索引</param>
+            <param name="nodeText">修改后的内容</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.UpdateNode(System.Xml.XmlNode,System.String)">
+            <summary>
+            修改节点的内容
+            </summary>
+            <param name="node">修改的节点对象</param>
+            <param name="nodeText">修改后的内容</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.UpdateNode(System.Xml.XmlDocument,System.Int32,NSYGShop.XmlParameter)">
+            <summary>
+            修改节点的内容
+            </summary>
+            <param name="xDoc">XMLDocument对象</param>
+            <param name="para">XML参数对象</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.UpdateNode(System.Xml.XmlDocument,System.Int32,System.String,System.Int32,System.String)">
+            <summary>
+            修改节点的内容
+            </summary>
+            <param name="xDoc">XMLDocument对象</param>
+            <param name="nodeName">父节点名称</param>
+            <param name="childIndex">该节点的索引</param>
+            <param name="nodeText">修改后的内容</param>
+            <param name="nodeValue">修改后的值，如果没有，那么该值为null</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.UpdateNode(System.Xml.XmlDocument,System.Int32,System.String,System.String)">
+            <summary>
+            修改节点的内容
+            </summary>
+            <param name="xDoc">XMLDocument对象</param>
+            <param name="nodeName">修改的节点名称</param>
+            <param name="nodeText">修改后的内容</param>
+            <param name="nodeValue">修改后的值，如果没有，那么该值为null</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.UpdateNode(System.String,System.Int32,NSYGShop.XmlParameter)">
+            <summary>
+            修改节点的内容
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="para">XML参数对象</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.UpdateNode(System.String,System.Int32,System.String,System.Int32,System.String)">
+            <summary>
+            修改节点的内容
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="nodeName">父节点名称</param>
+            <param name="childIndex">该节点的索引</param>
+            <param name="nodeText">修改后的内容</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.UpdateNode(System.String,System.Int32,System.String,System.String)">
+            <summary>
+            修改节点的内容
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="nodeName">修改的节点名称</param>
+            <param name="nodeText">修改后的内容</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.DeleteNode(System.Xml.XmlDocument,System.Int32)">
+            <summary>
+            删除节点
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="Index">节点索引</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.DeleteNode(System.String,System.Int32)">
+            <summary>
+            删除节点
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="Index">节点索引</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.DeleteNode(System.Xml.XmlDocument,System.Xml.XmlNode[])">
+            <summary>
+            删除节点
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="xns">需要删除的节点对象</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.DeleteNode(System.String,System.Xml.XmlNode[])">
+            <summary>
+            删除节点
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="xns">需要删除的节点对象</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.DeleteNode(System.Xml.XmlDocument,System.String,System.String)">
+            <summary>
+            删除节点
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="nodeName">节点名称</param>
+            <param name="nodeText">节点内容</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.DeleteNode(System.String,System.String,System.String)">
+            <summary>
+            删除节点
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="nodeName">节点名称</param>
+            <param name="nodeText">节点内容</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.SetAttribute(System.Xml.XmlNode,NSYGShop.AttributeParameter[])">
+            <summary>
+            修改属性值
+            </summary>
+            <param name="node">节点对象</param>
+            <param name="attps">属性参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.SetAttribute(System.Xml.XmlNode,System.String,System.String)">
+            <summary>
+            修改属性值
+            </summary>
+            <param name="node">节点对象</param>
+            <param name="attributeName">属性名称</param>
+            <param name="attributeValue">属性值</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.SetAttribute(System.Xml.XmlElement,NSYGShop.AttributeParameter[])">
+            <summary>
+            修改属性值
+            </summary>
+            <param name="elem">元素对象</param>
+            <param name="attps">属性参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.SetAttribute(System.Xml.XmlElement,System.String,System.String)">
+            <summary>
+            修改属性值
+            </summary>
+            <param name="elem">元素对象</param>
+            <param name="attributeName">属性名称</param>
+            <param name="attributeValue">属性值</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.SetAttribute(System.Xml.XmlDocument,NSYGShop.XmlParameter,NSYGShop.AttributeParameter[])">
+            <summary>
+            修改属性值
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="xpara">XML参数</param>
+            <param name="attps">属性参数</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.SetAttribute(System.Xml.XmlDocument,NSYGShop.XmlParameter,System.String,System.String)">
+            <summary>
+            修改属性值
+            </summary>
+            <param name="xDoc">XmlDocument对象</param>
+            <param name="xpara">XML参数</param>
+            <param name="newValue">新属性值</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.SetAttribute(System.String,NSYGShop.XmlParameter,System.String,System.String)">
+            <summary>
+            修改属性值
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="xpara">XML参数</param>
+            <param name="newValue">新属性值</param>
+        </member>
+        <member name="M:NSYGShop.UtilityXML.SetAttribute(System.String,NSYGShop.XmlParameter,NSYGShop.AttributeParameter[])">
+            <summary>
+            修改属性值
+            </summary>
+            <param name="fileFullName">文件名称，包括完整路径</param>
+            <param name="xpara">XML参数</param>
+            <param name="attps">属性参数</param>
+        </member>
+    </members>
+</doc>

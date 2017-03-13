@@ -1,0 +1,8 @@
+F:\MyTest\WxPay\WxPay\bin\WxPay.dll.config
+F:\MyTest\WxPay\WxPay\bin\WxPay.dll
+F:\MyTest\WxPay\WxPay\bin\WxPay.pdb
+F:\MyTest\WxPay\WxPay\bin\LitJson.dll
+F:\MyTest\WxPay\WxPay\bin\Newtonsoft.Json.dll
+F:\MyTest\WxPay\WxPay\obj\Release\WxPay.dll
+F:\MyTest\WxPay\WxPay\obj\Release\WxPay.pdb
+F:\MyTest\WxPay\WxPay\obj\Release\WxPay.csprojResolveAssemblyReference.cache
