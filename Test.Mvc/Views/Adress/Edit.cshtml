@@ -1,0 +1,80 @@
+﻿@model Test.Mvc.Models.AdressModel
+@{
+    Layout = null;
+    ViewBag.title = "编辑";
+    List<Test.Mvc.Models.ProvinceCityArea> listProv = ViewBag.ListProvince as List<Test.Mvc.Models.ProvinceCityArea>;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>地址编辑</title>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <div>
+            @Html.LabelFor(model => model.userName)：
+        </div>
+        <div>@Html.TextBoxFor(model => model.userName)</div>
+        <div>收货人电话：</div>
+        <div>@Html.TextBoxFor(model => model.tel)</div>
+
+        <label>省份：</label>
+        <select id="selProvince">
+            <option value="0">请选择</option>
+            @foreach (var item in listProv)
+            {
+                <option value="@item.ID">@item.Name</option>
+            }
+        </select>
+        <br />
+        <label>城市:</label>
+        <select id="selCity">
+            
+        </select>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#selProvince").change(function () {
+                    //获取省份的ID
+                    var provinceID = $("#selProvince").val();
+
+                    //获取城市
+                    var myCity = $("#selCity");
+
+                    alert(provinceID)
+                    
+
+                    //加入测试代码
+                    debugger;
+
+                    $.ajax({
+                        url: "/Adress/GetCityByPid/" + provinceID,
+                        type: "post",
+                        dataType: "json",
+                        contentType: "application/json",
+                        success: function (result) {
+                            var myHTML = "";
+                            myCity.html('<option value="0">请选择</option>');//赋值之前先清空
+                            $.each(result, function (i, data) {
+                                myHTML += "<option value=" + data.ID + ">" + data.Name + "</option>";
+                            });
+                            myCity.append(myHTML);
+                        },
+                        error: function (result) {
+                            //alert(result.responseText);
+                        }
+
+                    });
+
+
+                })
+
+            })
+        </script>
+    }
+</body>
+</html>

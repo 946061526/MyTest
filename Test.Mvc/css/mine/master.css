@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+.min-orange-btn{ display: block; width: 6.466667rem; height: 1.12rem; line-height: 1.12rem; text-align: center; 
+	background-color: #ff681d; border-radius: 0.666667rem; color: #fff; font-size: 0.4rem;}
+
+/*账号与安全设置*/
+.min-ssettings{ padding-top: 0.4rem; } 
+.min-ssettings li{ margin-bottom: 0.8rem;}
+
+.min-ssettings .sub-li{ height: 1.333333rem; line-height: 1.333333rem; padding: 0 0.4rem; background-color: #fff; } 
+
+.sub-li .smrz{ font-size: 0.4rem;  color: #333;}
+.sub-li .yrz{ font-size: 0.373333rem; color: #b2b2b2; }
+.sub-li .yrz img{ width: 0.4rem; height: 0.4rem; vertical-align: middle; margin-left: 0.506667rem;}
+
+.min-ssettings p{ font-size: 0.373333rem; color: #f00; padding-top: 0.213333rem; padding-left: 0.4rem;}
+
+
+
+/*安全验证*/
+.min-verification{ height: 1.333333rem; line-height: 1.333333rem; color: #333; background-color: #fff; 
+    padding-left: 0.4rem; font-size: 0.4rem;}
+.min-verification label{ width: 5em;  }
+.min-verification input{ font-size: 0.373333rem; }
+
+.min-determine a{ margin: 0.586667rem auto;}
+
+
+/*实名认证*/
+.min-prompt{ height: 1.093333rem; line-height: 0.533333rem; padding: 0.186667rem 0.4rem; background: #FFFAE8; 
+    font-size: 0.346667rem; color: #f00; }
+
+.min-verified{ height: 1.333333rem; line-height: 1.333333rem; background-color: #fff; padding-left: 0.4rem;
+    font-size: 0.4rem; }
+.min-verified label{ width: 6em; }
+.min-verified input{ font-size: 0.373333rem; }
+
+.min-submit button{ margin: 0.586667rem auto;}
+
+
+/*认证成功*/
+.min-successful{ text-align: center; font-family: .PingFang-SC-Regular; font-size: 0.4rem; color: #26D577;
+    line-height: 30px; background-color: #fff; padding: 0.706667rem 0 0.453333rem;}
+.min-successful img{ display: block; width: 1.306667rem; height: 1.306667rem; margin:0 auto 0.506667rem;}
+
+.min-information{ margin-top: 0.453333rem; }
+.min-information h3{ background-color: #f5f5f5; height: 0.8rem; line-height: 0.8rem; font-size: 0.373333rem;
+    color: #949BAA; padding-left: 0.373333rem; margin-bottom: 0.653333rem; }
+.min-information li{ height: 0.4rem; line-height: 0.4rem; margin-bottom: 0.586667rem; padding-left: 0.373333rem;}
+.min-information label{ font-size: 0.373333rem; color: #999; width: 6em; }
+.min-information span{ font-size: 0.4rem; color: #333; }
+
+.input-full input{ width: 100%; padding-right: 0.266667rem; box-sizing: border-box;}
+
+
+/*认证失败*/
+.min-defeat{ color: #ff681d;}
+.min-check{ padding: 0 1.76rem; text-align: center; }
+.min-check p{ font-size: 0.4rem; line-height: 0.613333rem; color: #999; padding: 0.586667rem 0 0.453333rem; }
+.min-check button{ margin: 0.586667rem auto;}
+
+
+/*帮助与反馈*/
+.min-feedback{}
+.min-feedback p{ font-size: 0.373333rem; line-height: 0.4rem; color: #949baa; padding: 0.373333rem 0.4rem; }
+.min-feedback textarea{ width: 10.0rem; height: 4.066667rem; padding: 0.266667rem 0.4rem; box-sizing:border-box; }
+.min-feedback button{ margin: 0.586667rem auto; }

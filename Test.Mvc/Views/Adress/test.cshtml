@@ -1,0 +1,190 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>test</title>
+    <script src="https://unpkg.com/vue"></script>
+    @*<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>*@
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    @*<script>
+        (function () {
+
+            alert(1);
+            $.get("http://api.manjd.com:8081/account/address/area/1", function (result) {
+                alert(result)
+
+                //需要把json字符串转换成json数组对象
+                var jsonarray = JSON.parse(result);
+                console.log(jsonarray);
+
+                //vue实例
+                var pvue = new Vue({
+                    el: "#pro_citys",
+                    data: {
+                        parray: jsonarray, //省存放的数据
+                        citys: [],  //城市存放的数据
+                        areas: [],  //区存放的数据
+                        streets: [],  //街道存放的数据
+                    },
+                    methods: {
+                        prochange: function () {
+
+                            //查询数据，然后给该省下面的城市赋值
+                            this.$data.citys = getAreaByPid($("#provice").val());
+                        },
+                        citychange: function () {
+
+                            //查询数据，然后给该省下面的城市赋值
+                            this.$data.areas = getAreaByPid($("#city").val());
+                        },
+                        areachange: function () {
+
+                            //查询数据，然后给该省下面的城市赋值
+                            this.$data.streets = getAreaByPid($("#area").val());
+                        }
+                    }
+                });
+
+            });
+
+        });
+
+
+        //通过省id查询城市id
+        var getAreaByPid = function (_pid) {
+
+            var jsonarray;
+
+            $.ajax({
+                async: false,
+                url: "http://api.manjd.com:8081/account/address/area",
+                type: "get",
+                data: { id: _pid },
+                success: function (result) {
+                    //需要把json字符串转换成json数组对象
+                    jsonarray = JSON.parse(result);
+                }
+            });
+            console.log(jsonarray);
+
+            return jsonarray;
+        }
+    </script>*@
+
+</head>
+<body>
+    <div id="pro_citys">
+
+        省:<select id="provice" v-on:change="prochange()">
+            <option v-for="pitem in parray" v-bind:value="pitem.AREA_ID">
+                {{ pitem.AREA_NAME }}
+            </option>
+        </select>
+
+        市：
+        <select id="city" v-on:change="citychange()">
+            <option v-for="pitem in citys" v-bind:value="pitem.AREA_ID">
+                {{ pitem.AREA_NAME }}
+            </option>
+        </select>
+
+        区：
+        <select id="area" v-on:change="areachange()">
+            <option v-for="pitem in areas" v-bind:value="pitem.AREA_ID">
+                {{ pitem.AREA_NAME }}
+            </option>
+        </select>
+
+        街道：
+        <select id="street">
+            <option v-for="pitem in streets" v-bind:value="pitem.AREA_ID">
+                {{ pitem.AREA_NAME }}
+            </option>
+        </select>
+        <script>
+            $(document).ready(function () {
+
+                alert(1)
+                //$.get("http://api.manjd.com:8081/account/address/area/1", function (result) {
+                //    alert(result)
+
+                //    //需要把json字符串转换成json数组对象
+                //    var jsonarray = JSON.parse(result);
+                //    console.log(jsonarray);
+
+                //    //vue实例
+                //    var pvue = new Vue({
+                //        el: "#pro_citys",
+                //        data: {
+                //            parray: jsonarray, //省存放的数据
+                //            citys: [],  //城市存放的数据
+                //            areas: [],  //区存放的数据
+                //            streets: [],  //街道存放的数据
+                //        },
+                //        methods: {
+                //            prochange: function () {
+
+                //                //查询数据，然后给该省下面的城市赋值
+                //                this.$data.citys = getAreaByPid($("#provice").val());
+                //            },
+                //            citychange: function () {
+
+                //                //查询数据，然后给该省下面的城市赋值
+                //                this.$data.areas = getAreaByPid($("#city").val());
+                //            },
+                //            areachange: function () {
+
+                //                //查询数据，然后给该省下面的城市赋值
+                //                this.$data.streets = getAreaByPid($("#area").val());
+                //            }
+                //        }
+                //    });
+
+                //});
+
+
+                $.ajax({
+                    async: false,
+                    url: "http://api.manjd.com:8080/api/address/v1/app/getarealist",
+                    type: "get",
+                    data: { area_id: 1 },
+                    success: function (result) {
+                        //需要把json字符串转换成json数组对象
+                        jsonarray = JSON.parse(result);
+                    }
+                });
+
+
+                //通过省id查询城市id
+                var getAreaByPid = function (_pid) {
+
+                    var jsonarray;
+
+                    $.ajax({
+                        async: false,
+                        url: "http://api.manjd.com:8080/api/address/v1/app/getarealist",
+                        type: "get",
+                        data: { area_id: _pid },
+                        success: function (result) {
+                            //需要把json字符串转换成json数组对象
+                            jsonarray = JSON.parse(result);
+                        }
+                    });
+                    console.log(jsonarray);
+
+                    return jsonarray;
+                }
+
+            })
+
+        </script>
+
+    </div>
+</body>
+</html>

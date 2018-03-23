@@ -1,0 +1,210 @@
+html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+body,button,input,textarea,select {
+    font-size: 12px;
+    font-family: 'PingFangSC-Regular',"Helvetica Neue",Helvetica,STHeiTi,sans-serif;
+}
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    margin: 0;
+    padding: 0;
+}
+
+input,select,textarea {
+    font-size: 100%;
+}
+
+fieldset,img {
+    border: 0;
+}
+
+ol,ul {
+    list-style: none;
+}
+
+h1,h2,h3,h4,h5,h6,strong,b {
+    font-weight: normal;
+}
+
+address,em,i,cite,s {
+    font-style: normal;
+}
+
+address,caption,cite,code,dfn,em,th,var {
+  font-style: normal;
+  font-weight: 500;
+}
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a,img {
+    -webkit-touch-callout: none;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+input,select,textarea,button {
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+    border-radius: 0;
+}
+
+textarea {
+    resize: none;
+}
+
+input[type=number]::-webkit-outer-spin-button,input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder{
+    color: #999;
+}
+
+/* 一致的 del 样式 */
+del {
+  text-decoration: line-through;
+}
+
+.thin-bor-top,.thin-bor-right,.thin-bor-bottom,.thin-bor-left {
+    position: relative;
+}
+
+.thin-bor-top::before,.thin-bor-bottom::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: transparent;
+    -webkit-transform: scaleY(0.5);
+    transform: scaleY(0.5);
+    left: 0;
+}
+
+.thin-bor-top::before {
+    border-top: 1px solid #dedede;
+}
+
+.thin-bor-bottom::after {
+    border-bottom: 1px solid #dedede;
+}
+
+.thin-bor-left::before,.thin-bor-right::after {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 100%;
+    background-color: transparent;
+    -webkit-transform: scaleX(0.5);
+    transform: scaleX(0.5);
+    top: 0;
+}
+
+.thin-bor-left::before {
+    border-left: 1px solid #dedede;
+}
+
+.thin-bor-right::after {
+    border-right: 1px solid #dedede;
+}
+
+.thin-bor-top::before {
+    top: 0;
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+}
+
+.thin-bor-bottom::after {
+    bottom: 0;
+    -webkit-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+}
+
+.thin-bor-left::before {
+    left: 0;
+    -webkit-transform-origin: 0;
+    transform-origin: 0;
+}
+
+.thin-bor-right::after {
+    right: 0;
+    -webkit-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+}
+
+/*处理第一个元素，和最后一个元素， 不需要边框的情况*/
+.thin-bor-top:first-of-type::before, .thin-bor-left:first-of-type::before,
+.thin-bor-bottom:last-of-type::after, .thin-bor-right:last-of-type::after{
+    display: none;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+    .thin-bor-top::before ,.thin-bor-bottom::after {
+        -webkit-transform:scaleY(0.33333333);
+        transform: scaleY(0.33333333);
+    }
+
+    .thin-bor-left::before ,.thin-bor-right::after  {
+        -webkit-transform: scaleX(0.33333333);
+        transform: scaleX(0.33333333);
+    }
+}
+
+/*字体颜色*/
+.orange{
+    color: #ff681d;
+}
+.gray3{
+    color: #333;
+}
+.gray6{
+    color: #666;
+}
+.gray9{
+    color: #999;
+}
+/*页面灰色背景*/
+.gray-page{
+    background-color: #f5f5f5;
+}
+/*按钮的背景色*/
+.gray-btn{
+    background-color: #f5f5f5;
+    color: #ff681d;
+}
+.orange-btn{    
+    background-color: #ff681d;
+    color: #fff;
+}
+/*flex布局*/
+.flex{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+}
+.justify-flex{
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: justify;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+.flex > .flex-one{
+    display: block;
+    width: 1%;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1;
+    flex: 1;
+}
+
+
