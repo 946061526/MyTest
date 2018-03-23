@@ -8,12 +8,13 @@ using System.Web.UI.WebControls;
 
 
 using System.ComponentModel.DataAnnotations;
+using ServiceStack.Redis;
 
 namespace MyTest
 {
     public partial class Test1 : System.Web.UI.Page
     {
-        protected void Page_Load( object sender, EventArgs e )
+        protected void Page_Load(object sender, EventArgs e)
         {
             //demo1:
 
@@ -83,24 +84,28 @@ namespace MyTest
             //TimeSpan ts = time1 - time2;
             //double sec = ts.TotalSeconds;
             //Response.Write( "sec" + sec.ToString() );
+
+            HttpRuntime.Cache.Insert("123","test");
+            string str =  HttpRuntime.Cache.Get("123").ToString();
+            Response.Write(str);
         }
 
-        protected void Button1_Click( object sender, EventArgs e )
+        protected void Button1_Click(object sender, EventArgs e)
         {
             //demo5
             StaticTest.auth = auth.Value;
-            Response.Write( "auth: " + StaticTest.GetAuth() );
+            Response.Write("auth: " + StaticTest.GetAuth());
         }
 
-        static public void sort<T>( IList<T> sortArray, Func<T, T, bool> comparison )
+        static public void sort<T>(IList<T> sortArray, Func<T, T, bool> comparison)
         {
             bool swapped = true;
             do
             {
                 swapped = false;
-                for ( int i = 0; i < sortArray.Count - 1; i++ )
+                for (int i = 0; i < sortArray.Count - 1; i++)
                 {
-                    if ( comparison( sortArray[i + 1], sortArray[i] ) )
+                    if (comparison(sortArray[i + 1], sortArray[i]))
                     {
                         T tmp = sortArray[i];
                         sortArray[i] = sortArray[i + 1];
@@ -108,18 +113,20 @@ namespace MyTest
                         swapped = true;
                     }
                 }
-            } while ( swapped );
+            } while (swapped);
         }
+
+
     }
 
-    
+
     public partial class Product
     {
 
     }
     public class Test
     {
-        
+
         public object ID
         {
             get;

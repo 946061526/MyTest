@@ -30,7 +30,69 @@
         //if (/^\d+\.\d$/.test(f))
         //    document.write(f + '0');
 
+
+        var ShareTo = function (url) {
+            var webUrl = '',
+                PadreCat = /v=pad\&/g,
+                TouchreCat = /v=touch\&/g;
+            if (PadreCat.test(webUrl)) {
+                url = url.replace(PadreCat, "")
+            } else if (TouchreCat.test(webUrl)) {
+                url = url.replace(TouchreCat, "")
+            };
+            url = encodeURIComponent(url); // 转发的url地址
+
+            console.log(url)
+        }
+        ShareTo('http://service.weibo.com/share/share.php?url=阿司法');
     </script>
+
+    <script>
+        //去左空格;
+        function ltrim(s) {
+            return s.replace(/(^\s*)/g, "");
+        }
+        //去右空格;
+        function rtrim(s) {
+            return s.replace(/(\s*$)/g, "");
+        }
+        //去左右空格;
+        function trim(s) {
+            return s.replace(/(^\s*)|(\s*$)/g, "");
+        }
+
+        //alert(rtrim('asdf  s').length)
+    </script>
+
+    <script>
+        var arr = [];
+        for (var i = 0; i < 10; i++) {
+            arr['a' + i] = i;
+        }
+
+        //遍历:
+        for (var key in arr) {
+            console.log(key + ':' + arr[key]);
+        }
+    </script>
+
+    <script>
+
+        function getIntersectOf2StringArray(arr1, arr2) {
+            var result = [];
+            if (!arr1.length || !arr2.length) return result;
+            for (var i = 0; i < arr1.length; i++) {
+                for (var j = 0; j < arr2.length; j++) {
+                    if (arr1[i] === arr2[j]) {
+                        result.push(arr1[i]);
+                    }
+                }
+            }
+            return result;
+        }
+        console.log('getIntersectOf2StringArray:' + getIntersectOf2StringArray([1, 2, 3], [1,3,4]));
+    </script>
+
 
 </head>
 <body>

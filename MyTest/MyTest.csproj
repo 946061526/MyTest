@@ -13,13 +13,15 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MyTest</RootNamespace>
     <AssemblyName>MyTest</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -39,6 +41,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Flurl, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.2.4.0\lib\net40\Flurl.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.Http.1.2.0\lib\net45\Flurl.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Lucene.China">
       <HintPath>lib\Lucene.China.dll</HintPath>
     </Reference>
@@ -47,19 +57,46 @@
       <HintPath>lib\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>E:\Code\xuef\xuef\bin\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ServiceStack">
+      <HintPath>..\packages\ServiceStack.Redis.Complete.1.0.0\lib\net35\ServiceStack.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common">
+      <HintPath>..\packages\ServiceStack.Common.4.5.12\lib\net45\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces">
+      <HintPath>..\packages\ServiceStack.Interfaces.4.5.12\lib\portable-wp80+sl5+net45+win8+wpa81+monotouch+monoandroid+xamarin.ios10\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite">
+      <HintPath>..\packages\ServiceStack.Redis.Complete.1.0.0\lib\net35\ServiceStack.OrmLite.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.OrmLite.SqlServer">
+      <HintPath>..\packages\ServiceStack.Redis.Complete.1.0.0\lib\net35\ServiceStack.OrmLite.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis">
+      <HintPath>..\packages\ServiceStack.Redis.4.5.12\lib\net45\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.ServiceInterface">
+      <HintPath>..\packages\ServiceStack.Redis.Complete.1.0.0\lib\net35\ServiceStack.ServiceInterface.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text">
+      <HintPath>..\packages\ServiceStack.Text.4.5.12\lib\net45\ServiceStack.Text.dll</HintPath>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -82,9 +119,7 @@
     <Content Include="data\sNoise.txt" />
     <Content Include="FileStreamTest.aspx" />
     <Content Include="H5_Storage.html" />
-    <Content Include="HtmlPage1.html" />
-    <Content Include="HtmlPage2.html" />
-    <Content Include="HtmlPage3.html" />
+    <Content Include="http.aspx" />
     <Content Include="js\address.js" />
     <Content Include="js\BottomFun.js" />
     <Content Include="js\dt\common.js" />
@@ -124,10 +159,10 @@
     <Content Include="lib\PanGu.Lucene.Analyzer.dll" />
     <Content Include="lib\PosDisplayCtrl.dll" />
     <Content Include="multiselect.html" />
+    <Content Include="nosql\testNosql.aspx" />
     <Content Include="scanPage.html" />
     <Content Include="test1.html" />
     <Content Include="Test1.aspx" />
-    <Content Include="testXuehua.html" />
     <Content Include="UploadHtml5.html" />
     <Content Include="uploadImg1.html" />
     <Content Include="uploadImg2.html" />
@@ -172,10 +207,13 @@
     <Content Include="VcCode\VcCode.css" />
     <Content Include="VcCode\VcCodeHtml.ascx" />
     <Content Include="VcCode\vcCodeUtil.js" />
+    <Content Include="vue.html" />
     <Content Include="WordSplit_Lucene.aspx" />
     <Content Include="WXPay\notify_url.aspx" />
     <Content Include="WXPay\WXPay.aspx" />
     <Content Include="联动下拉.html" />
+    <Content Include="packages.config" />
+    <Content Include="联动下拉2.html" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -215,7 +253,6 @@
     <Content Include="images\x_alt.png" />
     <Content Include="js\diyUpload.js" />
     <Content Include="js\jquery.js" />
-    <Content Include="js\plupload.dev.js" />
     <Content Include="js\webuploader.html5only.min.js" />
     <Content Include="UploadFiles.html" />
     <None Include="Web References\WebReference\upLoadFiles.disco" />
@@ -236,6 +273,20 @@
     </Compile>
     <Compile Include="FileStreamTest.aspx.designer.cs">
       <DependentUpon>FileStreamTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="http.aspx.cs">
+      <DependentUpon>http.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="http.aspx.designer.cs">
+      <DependentUpon>http.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="nosql\testNosql.aspx.cs">
+      <DependentUpon>testNosql.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="nosql\testNosql.aspx.designer.cs">
+      <DependentUpon>testNosql.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -324,13 +375,13 @@
     <Compile Include="WXPay\TenpayUtil.cs" />
     <Compile Include="WXPay\WXPay.aspx.cs">
       <DependentUpon>WXPay.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="WXPay\WXPay.aspx.designer.cs">
       <DependentUpon>WXPay.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="IOC.DI\" />
     <Folder Include="tmp\" />
     <Folder Include="upload\" />
   </ItemGroup>
