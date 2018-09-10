@@ -1,0 +1,166 @@
+﻿@{
+    /**/
+
+    ViewBag.Title = "新增版本";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .textWidth300 {
+        width: 300px
+    }
+
+    .textWidth800 {
+        width: 800px
+    }
+
+    .labelWidth {
+        width: 120px
+    }
+</style>
+
+
+<div class="layui-card">
+    <div class="layui-card-body">
+        <form class="layui-form">
+            <input type="hidden" id="hdID" value="@ViewBag.id" />
+            <div class="layui-form-item">
+                <label class="layui-form-label labelWidth">客户端</label>
+                <div class="layui-input-inline">
+                    <select name="label" id="sel_client">
+                        <option value="">请选择</option>
+                        <option value="1">Android</option>
+                        <option value="2">IOS</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label labelWidth">版本号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="verNo" id="verNo" placeholder="版本号" autocomplete="off" class="layui-input" maxlength="10" value="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label labelWidth">版本编号</label>
+                <div class="layui-input-inline">
+                    <input type="number" name="CheckVersionNumber" id="CheckVersionNumber" placeholder="版本编号" autocomplete="off" class="layui-input" maxlength="4" value="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label labelWidth">上传app包</label>
+                <div class="layui-input-block">
+                    <div class="layui-upload">
+                        <button type="button" class="layui-btn layui-btn-normal" id="btnFile">选择文件</button>
+                        <button type="button" class="layui-btn" id="btnUpload">开始上传</button>
+                        <input type="hidden" name="apkUrl" id="apkUrl" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" pane="">
+                <label class="layui-form-label labelWidth">更新内容</label>
+                <div class="layui-input-inline">
+                    <textarea placeholder="更新内容" id="content" maxlength="200" class="layui-input" style="width:450px;height:150px"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label labelWidth">强制更新</label>
+                <div class="layui-input-inline">
+                    <input name="isForce" type="radio" value="Y" title="是" />
+                    <input name="isForce" type="radio" value="N" title="否" />
+                </div>
+            </div>
+            <div class="layui-form-item layui-layout-admin">
+                <div class="layui-input-inline">
+                    <div class="layui-footer" style="text-align:right;">
+                        <button type="button" class="layui-btn layui-btn-primary" id="btnCancel">取消</button>
+                        <button type="button" class="layui-btn layui-btn-normal" lay-filter="add" id="btnSave" style="margin-right:20px;">提交</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script>
+
+        var loding;
+        $(document).ready(function () {
+            //上传
+            layui.upload.render({
+                elem: '#btnFile'
+                , url: '/Upload/UploadFileNew'
+                , auto: false
+                , accept: 'file' //普通文件
+                , exts: 'apk|ipa|zip|rar|7z' //允许上传文件类型
+                , size: 100 * 1024 //限制文件大小，单位 KB
+                , field: 'uploadFile'
+                , bindAction: '#btnUpload'
+                , before: function (obj) {
+                    //console.log('fileName:' + $(".layui-upload-choose").text())
+                    // $('#btnUpload').text('上传中...');
+                    loding = layer.msg('文件上传中,请稍等', { icon: 16, shade: 0.3, time: 0 });
+                }
+                , done: function (res, index, upload) {
+                    //console.log(res)
+                    var item = this.item;
+                    $("#apkUrl").val(res.name);
+                    // $('#btnUpload').text('开始上传');
+                    layer.close(loding);
+                }
+                , error: function () {
+                    // $('#btnUpload').text('开始上传');
+                    layer.close(loding);
+                }
+            });
+        });
+
+
+                        //var BYTES_PER_CHUNK = 1024 * 1024; // 每个文件切片大小定为1MB .
+                        //var slices;
+                        //var totalSlices;
+
+                        ////发送请求
+                        //function sendRequest() {
+                        //    var blob = document.getElementById("file").files[0];
+                        //    var start = 0;
+                        //    var end;
+                        //    var index = 0;
+
+
+                        //    // 计算文件切片总数
+                        //    slices = Math.ceil(blob.size / BYTES_PER_CHUNK);
+                        //    totalSlices = slices;
+                        //    while (start < blob.size) {
+                        //        end = start + BYTES_PER_CHUNK;
+                        //        if (end > blob.size) {
+                        //            end = blob.size;
+                        //        }
+                        //        uploadFile(blob, index, start, end);
+                        //        start = end;
+                        //        index++;
+                        //        if (index >= totalSlices)
+                        //            alert("Complete!!");
+                        //    }
+                        //}
+
+                        ////上传文件
+                        //function uploadFile(blob, index, start, end) {
+                        //    var xhr;
+                        //    var fd;
+                        //    var chunk;
+                        //    var sliceIndex = blob.name + index;
+                        //    chunk = blob.slice(start, end);//切割文件
+
+                        //    fd = new FormData();
+                        //    fd.append("FileName", chunk, sliceIndex);
+                        //    var xhr = new XMLHttpRequest();
+                        //    xhr.open('POST', 'Server URL', false);//false,同步上传；ture，异步上传
+                        //    xhr.send(fd);
+                        //    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                        //        setTimeout("", 10);
+                        //    } else {
+                        //        uploadFile(blob, index, start, end);
+                        //    }
+                        //}
+    </script>
+}

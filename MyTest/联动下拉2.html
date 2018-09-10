@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script>
+
+        var ws=new WebSocket()
+
+        var typeOne = ['类1', '类2', '类3', '类4'];
+        var typeTwo = [
+            ['类1-1', '类1-2', '类1-3', '类1-4'],
+            ['类2-1', '类2-2', '类2-3', '类2-4'],
+            ['类3-1', '类3-2', '类3-3', '类3-4'],
+            ['类4-1', '类4-2', '类4-3', '类4-4']
+        ];
+        var initType = function () {
+            var selTypeOne = document.getElementsByName('typeOne');
+            console.log(selTypeOne)
+            selTypeOne.length = 0;
+            //selTypeOne[0] = new Option('请选择一级分类', '0', true, true);
+           
+            var opt = new Option('请选择一级分类', '0', true, true);
+            console.log(opt)
+            selTypeOne
+            for (var i = 1; i <= typeOne.length; i++) {
+                selTypeOne[i] = new Option(typeOne[i], i);                
+            }
+        }
+        initType();
+    </script>
+</head>
+<body>
+    <form name="form1">
+        一级分类：
+        <select name="typeOne" onchange="getChild()">
+            
+        </select>
+        <select name="typeTwo">
+            <option value="0">请选择二级分类 </option>
+        </select>
+    </form>
+</body>
+</html>

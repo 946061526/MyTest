@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+
+    <div id="main">
+        <!--<div id="hello">{{ message }}</div>-->
+        <div>{{ messageHello }}</div>
+        <input v-model="messageHello"  v-on:input="checkinput" />
+
+        <div>
+            <p>{{ messageReverse }}</p>
+            <button v-on:click="reverseMessage">逆转消息</button>
+        </div>
+
+        <br />
+
+        <div>
+            <ul>
+                <li v-for="item in itemList" :key="item.id">
+                    <span style="color:red">{{item.id}}</span>
+                    <span>{{item.text}}</span>
+                </li>
+            </ul>
+            <button @click="fetchMore">@click加载更多...</button>
+        </div>
+        <br />
+        <button @click="show">{{showText}}</button>
+        <div v-show="showDiv" class="black" @click="animateEvent" style="position:relative;width:100px;height:100px;background-color: #000;"></div>
+
+        <br />
+        <br />
+        <a v-bind:href="url" target="_blank">百度</a>
+        <a :href="url" target="_blank">百度</a>
+
+        <br />
+        <div>
+            <input type="radio" id="one" value="1" v-model="picked">
+            <label for="one">One</label>
+            <br>
+            <input type="radio" id="two" value="2" v-model="picked">
+            <label for="two">Two</label>
+            <br>
+            <span>Picked: {{ picked }}</span>
+        </div>
+    </div>
+    <script>
+        //var hello = new Vue({
+        //    el: "#hello",
+        //    data: {
+        //        message: 'hello vue',
+        //    }
+        //});
+
+        var mainData = {
+            messageHello: 'hi vue',
+            messageReverse: 'reverse v',
+            itemList: [
+                { id: 1, text: 'china' },
+                { id: 2, text: 'shenzhen' },
+                { id: 3, text: 'nanshan' }
+            ],
+            showDiv: false,
+            showText: '点击展示',
+            url: 'http://www.baidu.com',
+            picked: '',
+            gridData: ''
+        }
+
+        var main = new Vue({
+            el: '#main',
+            data: mainData,
+            methods: {
+                reverseMessage: function () {
+                    this.messageReverse = this.messageReverse.split('').reverse().join('')
+                },
+                fetchMore: function () {
+                    this.itemList.push(...this.itemList.slice(0, 3));
+                },
+                show: function () {
+                    this.showDiv = !this.showDiv;
+                    if (this.showDiv)
+                        this.showText = '点击隐藏';
+                    else
+                        this.showText = '点击展示';
+                },
+                animateEvent: function () {
+                    $(".black").animate({
+                        'left': '300px'
+                    })
+                },
+                mounted: function () {
+                    this.$nextTick(function () {
+                        this.$http.jsonp('http://***.com').then(function (res) {
+                            console.log(res.data)
+                            this.gridData = res.data;
+                        })
+                    })
+                },
+                checkinput: function () {
+                    alert('checkinput')
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>

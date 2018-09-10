@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <link rel="stylesheet" href="@Url.Content("~/lay/layui/css/layui.css")" media="all">
+    <link rel="stylesheet" href="@Url.Content("~/lay/style/admin.css?v="+DateTime.Now.ToString("yyyyMMddHHmmss"))" media="all">
+    <link href="~/lay/style/vendor.css" rel="stylesheet" />
+    <script src="~/res/lay/modules/editor/neditor.config.js"></script>
+    <script src="~/res/lay/modules/editor/neditor.all.min.js"></script>
+    <script src="~/res/lay/modules/editor/i18n/zh-cn/zh-cn.js"></script>
+    @RenderSection("styles", required: false)
+</head>
+<body>
+    @RenderBody()
+    <script src="@Url.Content("~/lay/layui/layui.all.js")"></script>
+    <script>
+        var $ = layui.jquery;
+    </script>
+    <script src="@Url.Content("~/lay/common.js?v=1.0")"></script>
+    <script>
+        var Common = {
+            /**
+             * 格式化日期（含时间）
+             */
+            formatterDate: function (date) {
+                if (date == undefined) {
+                    return "";
+                }
+
+                /*json格式时间转js时间格式*/
+                date = date.substr(1, date.length - 2);
+                var obj = eval('(' + "{Date: new " + date + "}" + ')');
+                var date = obj["Date"];
+                if (date.getFullYear() < 1900) {
+                    return "";
+                }
+
+                var datetime = date.getFullYear()
+                    + "-"// "年"
+                    + ((date.getMonth() + 1) >= 10 ? (date.getMonth() + 1) : "0" + (date.getMonth() + 1))
+                    + "-"// "月"
+                    + (date.getDate() < 10 ? "0" + date.getDate() : date.getDate())
+                    + " " + (date.getHours() < 10 ? "0" + date.getHours() : date.getHours())
+                    + ":" + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes());
+
+                return datetime;
+            }
+        }
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
