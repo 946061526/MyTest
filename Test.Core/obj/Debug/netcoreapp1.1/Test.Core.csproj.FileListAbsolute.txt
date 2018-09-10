@@ -9,3 +9,14 @@ E:\res\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.AssemblyInfoInputs.cac
 E:\res\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.AssemblyInfo.cs
 E:\res\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.dll
 E:\res\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.pdb
+E:\MyGit\MyTest\Test.Core\bin\Debug\netcoreapp1.1\Test.Core.deps.json
+E:\MyGit\MyTest\Test.Core\bin\Debug\netcoreapp1.1\Test.Core.runtimeconfig.json
+E:\MyGit\MyTest\Test.Core\bin\Debug\netcoreapp1.1\Test.Core.runtimeconfig.dev.json
+E:\MyGit\MyTest\Test.Core\bin\Debug\netcoreapp1.1\Test.Core.dll
+E:\MyGit\MyTest\Test.Core\bin\Debug\netcoreapp1.1\Test.Core.pdb
+E:\MyGit\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.csprojAssemblyReference.cache
+E:\MyGit\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.csproj.CoreCompileInputs.cache
+E:\MyGit\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.AssemblyInfoInputs.cache
+E:\MyGit\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.AssemblyInfo.cs
+E:\MyGit\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.dll
+E:\MyGit\MyTest\Test.Core\obj\Debug\netcoreapp1.1\Test.Core.pdb

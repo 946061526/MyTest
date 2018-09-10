@@ -28,3 +28,12 @@ E:\res\MyTest\WxPay\WxPay\obj\Debug\WxPay.csproj.CoreCompileInputs.cache
 E:\res\MyTest\WxPay\WxPay\obj\Debug\WxPay.csproj.CopyComplete
 E:\res\MyTest\WxPay\WxPay\obj\Debug\WxPay.dll
 E:\res\MyTest\WxPay\WxPay\obj\Debug\WxPay.pdb
+E:\MyGit\MyTest\WxPay\WxPay\bin\WxPay.dll.config
+E:\MyGit\MyTest\WxPay\WxPay\bin\WxPay.dll
+E:\MyGit\MyTest\WxPay\WxPay\bin\WxPay.pdb
+E:\MyGit\MyTest\WxPay\WxPay\bin\Newtonsoft.Json.dll
+E:\MyGit\MyTest\WxPay\WxPay\obj\Debug\WxPay.csprojAssemblyReference.cache
+E:\MyGit\MyTest\WxPay\WxPay\obj\Debug\WxPay.csproj.CoreCompileInputs.cache
+E:\MyGit\MyTest\WxPay\WxPay\obj\Debug\WxPay.csproj.CopyComplete
+E:\MyGit\MyTest\WxPay\WxPay\obj\Debug\WxPay.dll
+E:\MyGit\MyTest\WxPay\WxPay\obj\Debug\WxPay.pdb

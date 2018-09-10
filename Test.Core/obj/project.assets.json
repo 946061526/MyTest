@@ -9775,11 +9775,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\res\\MyTest\\Test.Core\\Test.Core.csproj",
+      "projectUniqueName": "E:\\MyGit\\MyTest\\Test.Core\\Test.Core.csproj",
       "projectName": "Test.Core",
-      "projectPath": "E:\\res\\MyTest\\Test.Core\\Test.Core.csproj",
+      "projectPath": "E:\\MyGit\\MyTest\\Test.Core\\Test.Core.csproj",
       "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "E:\\res\\MyTest\\Test.Core\\obj\\",
+      "outputPath": "E:\\MyGit\\MyTest\\Test.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",

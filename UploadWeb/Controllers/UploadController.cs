@@ -51,7 +51,8 @@ namespace UploadWeb.Controllers
         /// 上传文件 zwc.280906
         /// </summary>
         /// <returns></returns>
-        public string UploadFile()
+        [HttpPost]
+        public string upload_file()
         {
             try
             {

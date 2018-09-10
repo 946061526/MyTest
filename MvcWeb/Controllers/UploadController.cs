@@ -125,10 +125,8 @@ namespace MvcWeb.Controllers
         /// <summary>
         /// 文件上传
         /// </summary>
-        /// <param name="file"></param>
-        /// <param name="fileName"></param>
         /// <returns></returns>
-        //[HttpPost]
+        [HttpPost]
         public ContentResult UploadFileNew()
         {
             Hashtable hash = new Hashtable();
@@ -160,15 +158,14 @@ namespace MvcWeb.Controllers
                     requestStream.Write(bytes, 0, bytes.Length);
                 }
                 HttpWebResponse respon = (HttpWebResponse)request.GetResponse();
-
                 hash["name"] = newFileName;
-                hash["msg"] = fullPath;
+                hash["fullpath"] = fullPath;
+                hash["msg"] = "success";
             }
             catch (Exception ex)
             {
                 hash["code"] = -1;
-                hash["name"] = "";
-                hash["msg"] = "error:" + ex.Message;
+                hash["msg"] = ex.Message;
             }
             return Content(System.Web.Helpers.Json.Encode(hash), "text/html; charset=UTF-8");
         }
