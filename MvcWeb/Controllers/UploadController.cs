@@ -17,15 +17,33 @@ namespace MvcWeb.Controllers
         {
             return View();
         }
-
+        #region 配置信息
         /// <summary>
         /// 资源站点URl
         /// </summary>
-        private static string resourceSiteUrl = ConfigurationManager.AppSettings["ResourceSiteUrl"].ToString();
+        public static string resourceSiteUrl = ConfigurationManager.AppSettings["ResourceSiteUrl"].ToString();
         /// <summary>
         /// 资源站点图片上传地址
         /// </summary>
-        private static string resourceSitePostUrl = ConfigurationManager.AppSettings["ResourceSitePostUrl"].ToString();
+        public static string resourceSitePostUrl = ConfigurationManager.AppSettings["ResourceSitePostUrl"].ToString();
+
+        /// <summary>
+        /// 上传非图片文件请求url,比如http://img.cai.com
+        /// </summary>
+        public static string UploadFileRequestUrl = ConfigurationManager.AppSettings["UploadFileRequestUrl"].ToString();
+        /// <summary>
+        /// 文件上传请求action，比如/UpLoad/UploadFile
+        /// </summary>
+        public static string UploadFileAction = ConfigurationManager.AppSettings["UploadFileAction"].ToString();
+        /// <summary>
+        /// 非图片文件保存目录，比如/Upload/files/
+        /// </summary>
+        public static string FileSavePath = ConfigurationManager.AppSettings["FileSavePath"].ToString();
+        /// <summary>
+        /// 判断是那个项目文件目录
+        /// </summary>
+        public static readonly string WebSiteEName = ConfigurationManager.AppSettings["WebSiteEName"].ToString();
+        #endregion
 
         //[HttpPost]
         //public ContentResult UpLoadImage()
@@ -110,18 +128,7 @@ namespace MvcWeb.Controllers
 
 
 
-        /// <summary>
-        /// 文件保存目录，比如/Upload/files/
-        /// </summary>
-        private static string FileSavePath = ConfigurationManager.AppSettings["FileSavePath"].ToString();
-        /// <summary>
-        /// 文件上传请求url，比如/UpLoad/UploadFile
-        /// </summary>
-        private static string UploadFilePostUrl = ConfigurationManager.AppSettings["UploadFilePostUrl"].ToString();
-        /// <summary>
-        /// 判断是那个项目文件目录
-        /// </summary>
-        private static readonly string WebSiteName = ConfigurationManager.AppSettings["WebSiteName"].ToString();
+
         /// <summary>
         /// 文件上传
         /// </summary>
@@ -140,11 +147,11 @@ namespace MvcWeb.Controllers
                 string newFileName = DateTime.Now.ToString("yyMMddHHmmssfff");
                 newFileName += file.FileName.Substring(file.FileName.LastIndexOf(".")).ToLower();
 
-                string SavePath = "/" + WebSiteName + FileSavePath; //比如：/HtAdmin/Upload/files/
-                string fullPath = string.Format("{0}{1}{2}", resourceSiteUrl, SavePath, newFileName);//比如：http:img.cai.com/HtAdmin/Upload/files/newFileName
+                string SavePath = string.Format("/{0}/{1}/", WebSiteEName, FileSavePath); //比如：/HtAdmin/Upload/files/
+                string fullPath = string.Format("{0}{1}{2}", UploadFileRequestUrl, SavePath, newFileName);//比如：http:img.cai.com/HtAdmin/Upload/files/newFileName
 
-                //上传接口,在资源站点/UpLoad/UploadFile
-                string postUrl = string.Format("{0}{1}?filename={2}&savepath={3}", resourceSiteUrl, UploadFilePostUrl, newFileName, SavePath);
+                //上传接口
+                string postUrl = string.Format("{0}/{1}?filename={2}&savepath={3}", UploadFileRequestUrl, UploadFileAction, newFileName, SavePath);
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(postUrl);
                 request.Method = "POST";
@@ -158,9 +165,16 @@ namespace MvcWeb.Controllers
                     requestStream.Write(bytes, 0, bytes.Length);
                 }
                 HttpWebResponse respon = (HttpWebResponse)request.GetResponse();
-                hash["name"] = newFileName;
-                hash["fullpath"] = fullPath;
-                hash["msg"] = "success";
+                if (respon.StatusCode == HttpStatusCode.OK)
+                {
+                    hash["name"] = newFileName;
+                    hash["fullpath"] = fullPath;
+                }
+                else
+                {
+                    hash["code"] = -1;
+                    hash["msg"] = "error";
+                }
             }
             catch (Exception ex)
             {

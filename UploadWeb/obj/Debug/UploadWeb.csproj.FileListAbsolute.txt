@@ -188,7 +188,6 @@ E:\MyGit\MyTest\UploadWeb\bin\zh-Hans\System.Web.Razor.resources.dll
 E:\MyGit\MyTest\UploadWeb\bin\zh-Hans\System.Web.WebPages.resources.dll
 E:\MyGit\MyTest\UploadWeb\bin\zh-Hans\System.Web.WebPages.Deployment.resources.dll
 E:\MyGit\MyTest\UploadWeb\bin\zh-Hans\System.Web.WebPages.Razor.resources.dll
-E:\MyGit\MyTest\UploadWeb\obj\Debug\UploadWeb.csprojAssemblyReference.cache
 E:\MyGit\MyTest\UploadWeb\obj\Debug\UploadWeb.csproj.CoreCompileInputs.cache
 E:\MyGit\MyTest\UploadWeb\obj\Debug\UploadWeb.csproj.CopyComplete
 E:\MyGit\MyTest\UploadWeb\obj\Debug\UploadWeb.dll

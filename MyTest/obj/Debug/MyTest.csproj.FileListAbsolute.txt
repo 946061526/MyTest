@@ -125,9 +125,6 @@ E:\MyGit\MyTest\MyTest\bin\ServiceStack.OrmLite.SqlServer.dll
 E:\MyGit\MyTest\MyTest\bin\ServiceStack.Redis.dll
 E:\MyGit\MyTest\MyTest\bin\ServiceStack.ServiceInterface.dll
 E:\MyGit\MyTest\MyTest\bin\ServiceStack.Text.dll
-E:\MyGit\MyTest\MyTest\bin\System.Net.Http.Formatting.dll
-E:\MyGit\MyTest\MyTest\bin\Couchbase.dll
-E:\MyGit\MyTest\MyTest\bin\Enyim.Caching.dll
 E:\MyGit\MyTest\MyTest\bin\Flurl.xml
 E:\MyGit\MyTest\MyTest\bin\Flurl.Http.xml
 E:\MyGit\MyTest\MyTest\bin\Newtonsoft.Json.xml
@@ -135,11 +132,6 @@ E:\MyGit\MyTest\MyTest\bin\ServiceStack.Common.xml
 E:\MyGit\MyTest\MyTest\bin\ServiceStack.Interfaces.xml
 E:\MyGit\MyTest\MyTest\bin\ServiceStack.Redis.xml
 E:\MyGit\MyTest\MyTest\bin\ServiceStack.Text.xml
-E:\MyGit\MyTest\MyTest\bin\System.Web.Http.xml
-E:\MyGit\MyTest\MyTest\bin\YGWebUtility.xml
-E:\MyGit\MyTest\MyTest\bin\System.Net.Http.Formatting.xml
-E:\MyGit\MyTest\MyTest\bin\zh-Hans\System.Web.Http.resources.dll
-E:\MyGit\MyTest\MyTest\bin\zh-Hans\System.Net.Http.Formatting.resources.dll
 E:\MyGit\MyTest\MyTest\obj\Debug\MyTest.csprojAssemblyReference.cache
 E:\MyGit\MyTest\MyTest\obj\Debug\MyTest.csproj.CoreCompileInputs.cache
 E:\MyGit\MyTest\MyTest\obj\Debug\MyTest.csproj.CopyComplete
