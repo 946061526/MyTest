@@ -68,6 +68,20 @@
                     <input name="isForce" type="radio" value="N" title="否" />
                 </div>
             </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label ">图标</label>
+                <div class="layui-input-block">
+                    <div class="layui-upload-drag" id="upload">
+                        <i class="layui-icon"></i>
+                        <p>点击上传</p>
+                    </div>
+                    <input type="hidden" name="imgPath" id="imgPath" />
+                    <div style="display:inline-block; vertical-align:top;" id="btnUpload">
+                        <img style="width:100px;height:100px;" />
+                    </div>
+                </div>
+            </div>
             <div class="layui-form-item layui-layout-admin">
                 <div class="layui-input-inline">
                     <div class="layui-footer" style="text-align:right;">
@@ -86,34 +100,105 @@
         var loding, spApkUrl = $("#spApkUrl");
         $(document).ready(function () {
             //上传
+            //layui.upload.render({
+            //    elem: '#btnFile'
+            //    , url: '/Upload/UploadFileNew'
+            //    , auto: false
+            //    , accept: 'file' //普通文件
+            //    , exts: 'apk|ipa|zip|rar|7z' //允许上传文件类型
+            //    , size: 100 * 1024 //限制文件大小，单位 KB
+            //    , field: 'uploadFile'
+            //    , bindAction: '#btnUpload'
+            //    , before: function (obj) {
+            //        loding = layer.msg('文件上传中,请稍等', { icon: 16, shade: 0.3, time: 0 });
+            //    }
+            //    , done: function (res, index, upload) {
+            //        layer.close(loding);
+            //        if (res.code == 0) {
+            //            layer.msg('上传成功');
+            //            $("#apkUrl").val(res.name);
+            //            spApkUrl.show();
+            //            spApkUrl.find('a').attr("href", res.fullpath);
+            //        } else {
+            //            layer.alert("上传失败: " + res.msg, { icon: 2, title: "提示" });
+            //        }
+            //    }
+            //    , error: function () {
+            //        layer.close(loding);
+            //    }
+            //});
+
             layui.upload.render({
                 elem: '#btnFile'
-                , url: '/Upload/UploadFileNew'
-                , auto: false
-                , accept: 'file' //普通文件
-                , exts: 'apk|ipa|zip|rar|7z' //允许上传文件类型
+                , url: '/Upload/UploadImageNew'
+                , auto: false                
                 , size: 100 * 1024 //限制文件大小，单位 KB
-                , field: 'uploadFile'
+                , field: 'imgFile'
                 , bindAction: '#btnUpload'
                 , before: function (obj) {
                     loding = layer.msg('文件上传中,请稍等', { icon: 16, shade: 0.3, time: 0 });
                 }
                 , done: function (res, index, upload) {
                     layer.close(loding);
+                    //上传完毕回调
                     if (res.code == 0) {
-                        layer.msg('上传成功');
-                        $("#apkUrl").val(res.name);
-                        spApkUrl.show();
-                        spApkUrl.find('a').attr("href", res.fullpath);
+                        var imgobj = new Image(); //创建新img对象
+                        imgobj.src = res.fullpath; //指定数据源
+                        imgobj.className = 'thumb';
+                        imgobj.style = "width:100px;height:100px;";
+                        var prev = document.getElementById("btnUpload");
+                        while (prev.hasChildNodes()) {
+                            prev.removeChild(prev.firstChild);
+                        }
+                        prev.appendChild(imgobj);
+                        $("input[name='imgPath']").val(res.path);
                     } else {
-                        layer.alert("上传失败: " + res.msg, { icon: 2, title: "提示" });
+                        //ShowErrorMsg('上传失败');
                     }
                 }
                 , error: function () {
                     layer.close(loding);
                 }
             });
+
+            //图标
+            //上传
+            var uploadInst = layui.upload.render({
+                elem: '#upload', //绑定元素
+                accept: 'images', //允许上传的文件类型
+                multiple: false, //允许多文件上传
+                auto: true, //选完文件后不要自动上传
+                number: 1,
+                field: 'imgFile',
+                //bindAction: '#btnOk', //指定一个按钮触发上传
+                //url: '/UpLoad/UploadImage', //上传接口
+                url: '/UpLoad/UploadImageNew',
+                size: 2 * 1024,// 大小限制  单位  kb
+                done: function (res) {
+                    //上传完毕回调
+                    if (res.code == 0) {
+                        var imgobj = new Image(); //创建新img对象
+                        imgobj.src = res.fullpath; //指定数据源
+                        imgobj.className = 'thumb';
+                        imgobj.style = "width:100px;height:100px;";
+                        var prev = document.getElementById("btnUpload");
+                        while (prev.hasChildNodes()) {
+                            prev.removeChild(prev.firstChild);
+                        }
+                        prev.appendChild(imgobj);
+                        $("input[name='imgPath']").val(res.path);
+                    } else {
+                        //ShowErrorMsg('上传失败');
+                    }
+                },
+                error: function (r) {
+                    //请求异常回调
+                    //ShowErrorMsg('上传失败');
+                }
+            });
         });
+
+
 
 
                                                                 //var BYTES_PER_CHUNK = 1024 * 1024; // 每个文件切片大小定为1MB .

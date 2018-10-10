@@ -183,5 +183,62 @@ namespace MvcWeb.Controllers
             }
             return Content(System.Web.Helpers.Json.Encode(hash), "text/html; charset=UTF-8");
         }
+
+
+
+        [HttpPost]
+        public ContentResult UploadImageNew()
+        {
+            Hashtable hash = new Hashtable();
+            hash["code"] = 0;
+            try
+            {
+                var file = Request.Files["imgFile"];
+                if (file == null)
+                    throw new Exception("file is null");
+
+                string newFileName = "";
+
+                newFileName += DateTime.Now.ToString("yyMMddHHmmss");
+                newFileName += file.FileName.Substring(file.FileName.LastIndexOf(".")).ToLower();
+
+                string SavePath = string.Format("/{0}/{1}/", WebSiteEName, FileSavePath); //比如：/HtAdmin/Upload/files/
+                string Path = string.Format("{0}{1}", SavePath, newFileName);//比如：/HtAdmin/Upload/files/newFileName
+                string fullPath = string.Format("{0}{1}{2}", UploadFileRequestUrl, SavePath, newFileName);//比如：http://img.cai.com/HtAdmin/Upload/files/newFileName
+
+                //上传接口
+                string postUrl = string.Format("{0}/{1}?filename={2}&savepath={3}", UploadFileRequestUrl, UploadFileAction, newFileName, SavePath);
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(postUrl);
+                request.Method = "POST";
+                request.AllowAutoRedirect = false;
+                request.ContentType = "multipart/form-data";
+                byte[] bytes = new byte[file.InputStream.Length];
+                file.InputStream.Read(bytes, 0, (int)file.InputStream.Length);
+                request.ContentLength = bytes.Length;
+                using (Stream requestStream = request.GetRequestStream())
+                {
+                    requestStream.Write(bytes, 0, bytes.Length);
+                }
+                HttpWebResponse respon = (HttpWebResponse)request.GetResponse();
+                if (respon.StatusCode == HttpStatusCode.OK)
+                {
+                    hash["name"] = newFileName;
+                    hash["path"] = Path;
+                    hash["fullpath"] = fullPath;
+                }
+                else
+                {
+                    hash["code"] = -1;
+                    hash["msg"] = "error";
+                }
+            }
+            catch (Exception ex)
+            {
+                hash["code"] = -1;
+                hash["msg"] = ex.Message;
+            }
+            return Content(System.Web.Helpers.Json.Encode(hash), "text/html; charset=UTF-8");
+        }
     }
 }
